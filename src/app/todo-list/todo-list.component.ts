@@ -36,4 +36,26 @@ export class TodoListComponent implements OnInit {
     console.log("parent emit");
   }
 
+
+  markAllDone()
+  {
+    for(let todo of this.todos)
+    {
+      this.todoService.addFinishedTodo(todo);
+      this.todoService.deleteTodo(todo);
+    }
+    this.updateList();
+  }
+
+
+  deleteAllTodos()
+  {
+    for(let todo of this.todos)
+    {
+      this.todoService.deleteTodo(todo);
+    }
+    console.log(this.todos);
+    this.updateList();
+  }
+
 }

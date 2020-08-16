@@ -26,6 +26,7 @@ export class TodoService {
     return this.finishedTodos;
   }
 
+
   addTodo(todo)
   {
     let modifiedTodo = {
@@ -39,7 +40,9 @@ export class TodoService {
   addFinishedTodo(todo)
   {
     this.finishedTodos.push(todo);
+    console.log(this.finishedTodos);
   }
+
 
   deleteTodo(todo)
   {
@@ -48,6 +51,11 @@ export class TodoService {
     this.todos = newTodos;
     console.log(this.todos);
 
+  }
+
+  deleteFinishedTodos()
+  {
+    this.finishedTodos = [];
   }
 
   updateTodo(todo)

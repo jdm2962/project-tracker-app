@@ -30,11 +30,17 @@ export class TodoComponent implements OnInit {
     this.doUpdate.emit();
   }
 
-  finishedTodo()
+  // finishedTodo()
+  // {
+  //   this.finishedUpdate.emit(this.todo);
+  //   console.log("emit");
+  //   this.deleteTodo();  // remove from todos
+  // }
+
+  todoDone()
   {
-    this.finishedUpdate.emit(this.todo);
-    console.log("emit");
-    this.deleteTodo();  // remove from todos
+    this.todoService.addFinishedTodo(this.todo);
+    this.deleteTodo();
   }
 
 }
