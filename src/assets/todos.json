@@ -1,0 +1,24 @@
+[
+
+
+    {
+      "id" : 1,
+      "todo" : "Learn angular",
+      "done" : false
+    },
+
+    {
+      "id" : 2,
+      "todo" : "Finish angular 'try it' tutorial ",
+      "done" : true
+    },
+
+    {
+      "id" : 3,
+      "todo" : "Learn Nodejs",
+      "done" : false
+    }
+
+
+
+]
