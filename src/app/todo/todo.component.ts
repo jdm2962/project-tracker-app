@@ -13,6 +13,7 @@ export class TodoComponent implements OnInit {
 
   @Input() todo : {};
   @Output() doUpdate = new EventEmitter<boolean>();
+  @Output() finishedUpdate = new EventEmitter();
 
   constructor(
     private todoService : TodoService
@@ -27,6 +28,13 @@ export class TodoComponent implements OnInit {
   {
     this.todoService.deleteTodo(this.todo);
     this.doUpdate.emit();
+  }
+
+  finishedTodo()
+  {
+    this.finishedUpdate.emit(this.todo);
+    console.log("emit");
+    this.deleteTodo();  // remove from todos
   }
 
 }

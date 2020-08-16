@@ -1,7 +1,7 @@
 
 <div *ngIf = "todo">
   <span>{{ todo.todo }}</span>
-  <button>Mark Done</button>
+  <button (click) = "finishedTodo()">Mark Done</button>
   <button (click) = "deleteTodo()">Delete</button>
 
 </div>

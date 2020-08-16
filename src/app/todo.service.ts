@@ -9,6 +9,7 @@ export class TodoService {
 
 
   todos = [];
+  finishedTodos = [];
   todo : string;
 
   constructor(
@@ -20,6 +21,11 @@ export class TodoService {
     return this.todos;
   }
 
+  getFinishedTodos()
+  {
+    return this.finishedTodos;
+  }
+
   addTodo(todo)
   {
     let modifiedTodo = {
@@ -28,6 +34,11 @@ export class TodoService {
       "done" : false
     }
     this.todos.push(modifiedTodo);
+  }
+
+  addFinishedTodo(todo)
+  {
+    this.finishedTodos.push(todo);
   }
 
   deleteTodo(todo)

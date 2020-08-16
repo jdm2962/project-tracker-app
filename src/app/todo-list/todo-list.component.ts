@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { TodoService } from "../todo.service";
 
@@ -9,6 +9,8 @@ import { TodoService } from "../todo.service";
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+
+  @Output() finishedUpdate = new EventEmitter();
 
   todos = [];
 
@@ -26,6 +28,12 @@ export class TodoListComponent implements OnInit {
   {
     console.log('update ran');
     this.todos = this.todoService.getTodos();
+  }
+
+  finishedTodo(todo)
+  {
+    this.finishedUpdate.emit(todo);
+    console.log("parent emit");
   }
 
 }
