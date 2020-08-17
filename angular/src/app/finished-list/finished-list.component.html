@@ -1,0 +1,10 @@
+
+<h3>Finished Todos</h3>
+
+<button (click) = "clearFinishedTodos()">Clear Finished Todos</button>
+
+<div *ngFor = "let todo of finishedTodos">
+  <div *ngIf = "todo">{{ todo.todo }}</div>
+</div>
+
+

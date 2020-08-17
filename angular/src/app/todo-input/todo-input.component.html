@@ -1,0 +1,10 @@
+
+<h3>Add Todo</h3>
+
+<div (keyup.enter) = "addTodoEnter()">
+  <input type="text" #text (keyup) = "updateValue(text.value)" id = "todoInput" >
+  <!-- <p>{{ todoValue }}</p> -->
+
+  <button (click) = "addTodo()" id = "inputButton">Add Todo</button>
+
+</div>

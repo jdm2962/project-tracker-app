@@ -1,0 +1,15 @@
+
+<h3>Todo</h3>
+
+<button (click) = "markAllDone()">Mark All Done</button>
+<button (click) = "deleteAllTodos()">Delete All</button>
+<button (click) = "saveToDb()">Save Todos</button>
+
+<div *ngFor = "let todo of todos">
+  <app-todo [todo] = "todo" (doUpdate) = "updateList()" (finishedUpdate) = "finishedTodo($event)"></app-todo>
+</div>
+
+
+
+
+
