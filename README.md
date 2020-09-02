@@ -1,3 +1,4 @@
 # Todo app
 
-Frontend : Angular
+Frontend : React
+Backend : Serverless(AWS Api Gateway, Lambda)
