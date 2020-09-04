@@ -12,6 +12,13 @@ export default class FinishedTodos extends React.Component
 		{
 			finTodos : this.props.finishedTodos || []
 		}
+
+		this.undoAll = this.undoAll.bind(this);
+	}
+
+	undoAll()
+	{
+		this.props.undo();
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot)
@@ -30,7 +37,13 @@ export default class FinishedTodos extends React.Component
 		return(
 			<div>
 				<h2>Finished List</h2>
-				{finTodos.map(todo => <Todo todo = {todo} key = {todo.todoid} changeIsDone = {this.props.changeIsDone} />)}
+				<button onClick = {this.undoAll}>Undo All</button>
+				{finTodos.map(todo => 
+					<Todo 
+						todo = {todo} key = {todo.todoid} 
+						changeIsDone = {this.props.changeIsDone} 
+					/>
+				)}
 			</div>
 		);
 	}

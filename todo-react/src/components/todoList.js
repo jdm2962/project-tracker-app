@@ -12,6 +12,20 @@ export default class TodoList extends React.Component
 		{
 			todos : this.props.todos
 		}
+
+		this.markDone = this.markDone.bind(this);
+		this.deleteTodos = this.deleteTodos.bind(this);
+	}
+
+	markDone()
+	{
+		let markAllDone = this.props.markAllDone;
+		markAllDone();
+	}
+
+	deleteTodos()
+	{
+
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot)
@@ -31,8 +45,11 @@ export default class TodoList extends React.Component
 		return(
 			<div>
 				<h2>TODO</h2>
-				<button>
+				<button onClick = {this.markDone}>
 					Mark All Done
+				</button>
+				<button onClick = {this.deleteTodos}>
+					Delete All
 				</button>
 				{todos.map((todo) => {
 					return (
