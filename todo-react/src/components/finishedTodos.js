@@ -14,11 +14,17 @@ export default class FinishedTodos extends React.Component
 		}
 
 		this.undoAll = this.undoAll.bind(this);
+		this.deleteTodos = this.deleteTodos.bind(this);
 	}
 
 	undoAll()
 	{
 		this.props.undo();
+	}
+
+	deleteTodos()
+	{
+		this.props.deleteTodos(this.state.finTodos);
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot)
@@ -38,6 +44,7 @@ export default class FinishedTodos extends React.Component
 			<div>
 				<h2>Finished List</h2>
 				<button onClick = {this.undoAll}>Undo All</button>
+				<button onClick = {this.deleteTodos}>Clear All</button>
 				{finTodos.map(todo => 
 					<Todo 
 						todo = {todo} key = {todo.todoid} 

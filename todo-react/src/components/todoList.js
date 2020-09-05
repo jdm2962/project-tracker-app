@@ -25,7 +25,7 @@ export default class TodoList extends React.Component
 
 	deleteTodos()
 	{
-
+		this.props.deleteTodos(this.state.todos);
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot)

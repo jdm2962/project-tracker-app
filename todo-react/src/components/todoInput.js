@@ -44,8 +44,6 @@ export default class TodoInput extends React.Component
 
 	render()
 	{
-		let value = this.state.value;
-		let addTodo = this.props.addTodo;
 
 		return(
 			<div>

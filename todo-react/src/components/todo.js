@@ -10,7 +10,7 @@ export default class Todo extends React.Component
 		{
 			todo : this.props.todo.todo,
 			isdone : this.props.todo.isdone,
-			todoId : this.props.todoid
+			todoid : this.props.todoid
 		};
 
 		this.inputChange = this.inputChange.bind(this);

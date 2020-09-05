@@ -22,20 +22,30 @@ class TodoContainer extends React.Component
 		this.markAllDone = this.markAllDone.bind(this);
 		this.undoAll = this.undoAll.bind(this);
 		this.deleteTodos = this.deleteTodos.bind(this);
+		this.saveToDb = this.saveToDb.bind(this);
+		this.clear = this.clear.bind(this);
 	}
 
 
 	addTodo(todo)
 	{
-		let newTodos = [...this.state.todos];
-		let newTodo =
+		if(todo === "")
 		{
-			todo : todo,
-			isDone : false,
-			todoid : v4()
+			return;
 		}
-		newTodos.push(newTodo);
-		this.setState({todos : newTodos});
+		else
+		{
+			let newTodos = [...this.state.todos];
+			let newTodo =
+			{
+				todo : todo,
+				isDone : false,
+				todoid : v4()
+			}
+			newTodos.push(newTodo);
+			this.setState({todos : newTodos});
+		}
+		
 	}
 
 	changeIsDone(todo)
@@ -69,7 +79,29 @@ class TodoContainer extends React.Component
 
 	deleteTodos(todos)
 	{
+		let currentTodos = this.state.todos;
+		let newTodos = [];
+		todos.forEach(todo =>
+		{
+			currentTodos.splice(currentTodos.indexOf(todo), 1);
+		});
+		newTodos = [...currentTodos];
+		this.setState({todos : newTodos});
+	}
 
+	saveToDb()
+	{
+		let options = 
+		{
+			method : "POST",
+			body : JSON.stringify(this.state.todos)
+		};
+		fetch("https://1rmebtk837.execute-api.us-east-1.amazonaws.com/test-1/todos/save", options)
+	}
+
+	clear()
+	{
+		this.setState({todos : []});
 	}
 	
 	componentDidMount()
@@ -86,6 +118,8 @@ class TodoContainer extends React.Component
 		return(
 			<div>
 				<TodoInput addTodo = {this.addTodo}/>
+				<button onClick = {this.saveToDb}>Save All</button>
+				<button onClick = {this.clear}>Clear Everything</button>
 				<TodoList 
 					todos = {todos.filter(todo => !todo.isdone)} 
 					changeIsDone = {this.changeIsDone}
