@@ -1,6 +1,8 @@
 import React from "react";
 
 import {v4} from "uuid"
+import moment from "moment";
+
 
 import TodoInput from "./todoInput"
 import TodoList from "./todoList";
@@ -39,8 +41,9 @@ class TodoContainer extends React.Component
 			let newTodo =
 			{
 				todo : todo,
-				isDone : false,
-				todoid : v4()
+				isdone : false,
+				todoid : v4(),
+				datecreated : moment().format("YYYY-MM-DD hh:mm:ss")
 			}
 			newTodos.push(newTodo);
 			this.setState({todos : newTodos});
@@ -97,6 +100,9 @@ class TodoContainer extends React.Component
 			body : JSON.stringify(this.state.todos)
 		};
 		fetch("https://1rmebtk837.execute-api.us-east-1.amazonaws.com/test-1/todos/save", options)
+			.then(res => res.json())
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
 	}
 
 	clear()

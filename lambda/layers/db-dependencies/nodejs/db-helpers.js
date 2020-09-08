@@ -1,9 +1,11 @@
 const { Pool } = require("pg");
+const pgp = require("pg-promise")();
 
 const aws = require("aws-sdk");
 // update config:region
 aws.config.update({region : "us-east-1"});
 const ssm = new aws.SSM();
+let connString = "";
 
 
 
@@ -45,9 +47,26 @@ function getDbCredentials()
 
 
 let credentials = 
-(async () => {
+(async () => 
+{
 	let result = await getDbCredentials();	
 	return result;
+})();
+
+let pgpDb = 
+(async () =>
+{
+	let dbCredentials = await credentials;
+	
+	try
+	{
+		let db = pgp(dbCredentials);
+		return db;
+	}
+	catch(err)
+	{
+		console.log(err);
+	}
 })();
 
 let pool = 
@@ -58,3 +77,4 @@ let pool =
 
 
 exports.pool = pool;
+exports.db = pgpDb;
