@@ -108,6 +108,7 @@ class TodoContainer extends React.Component
 	clear()
 	{
 		this.setState({todos : []});
+		setTimeout(() => this.saveToDb(), 500);
 	}
 	
 	componentDidMount()
@@ -122,21 +123,38 @@ class TodoContainer extends React.Component
 	{
 		let todos = this.state.todos;
 		return(
-			<div>
-				<TodoInput addTodo = {this.addTodo}/>
-				<button onClick = {this.saveToDb}>Save All</button>
-				<button onClick = {this.clear}>Clear Everything</button>
-				<TodoList 
-					todos = {todos.filter(todo => !todo.isdone)} 
-					changeIsDone = {this.changeIsDone}
-					markAllDone = {this.markAllDone}
-					deleteTodos = {this.deleteTodos}/>
-				<FinishedTodosList 
-					finishedTodos = {todos.filter(todo => todo.isdone)} 
-					changeIsDone = {this.changeIsDone} 
-					undo = {this.undoAll}
-					deleteTodos = {this.deleteTodos}/>
+			<div className = "section todoContainer" id = "todoContainer">
+				<div className="field is-grouped" id = "controlButtons">
+				  <p className="control">
+				    <button 
+				    	onClick = {this.saveToDb}
+				    	className = "button is-link"
+				    	id = "saveButton">
+				    		Save All
+				    </button>
+				  </p>
+				  <p className="control">
+				    <button 
+				    	onClick = {this.clear}
+				    	className = "button is-danger">
+				    		Clear All
+				    </button>
+				  </p>
+				</div>
 
+				<TodoInput addTodo = {this.addTodo}/>
+				<div className = "" id = "todoLists">
+					<TodoList 
+						todos = {todos.filter(todo => !todo.isdone)} 
+						changeIsDone = {this.changeIsDone}
+						markAllDone = {this.markAllDone}
+						deleteTodos = {this.deleteTodos}/>
+					<FinishedTodosList 
+						finishedTodos = {todos.filter(todo => todo.isdone)} 
+						changeIsDone = {this.changeIsDone} 
+						undo = {this.undoAll}
+						deleteTodos = {this.deleteTodos}/>
+				</div>
 			</div>
 		);
 	}

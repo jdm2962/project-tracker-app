@@ -3,16 +3,20 @@ import React from "react";
 
 class Header extends React.Component
 {
-	constructor(props)
-	{
-		super(props);
-	}
 
 	render()
 	{
 		return(
 
-			<h1>Todo App Header!</h1>
+			<section className="hero is-primary is-bold">
+			  <div className="hero-body">
+			    <div className="container">
+			      <h1 className="title">
+			        TODO
+			      </h1>
+			    </div>
+			  </div>
+			</section>
 		);
 	}
 }

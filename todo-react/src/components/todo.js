@@ -27,9 +27,17 @@ export default class Todo extends React.Component
 	render()
 	{
 		return(
-			<div>
-				<input type = "checkbox" defaultChecked = {this.props.todo.isdone} onChange = {this.inputChange}/>
-				<span>{this.state.todo}</span>
+			<div id = "todo">
+				<label className="checkbox">
+					<input 
+						type = "checkbox" 
+						defaultChecked = {this.props.todo.isdone} 
+						onChange = {this.inputChange}/>
+				</label>
+				<span 
+					className = {this.state.isdone ? "content is-medium strike" : "content is-medium"}>
+						{this.state.todo}
+				</span>
 			</div>
 		);
 	}

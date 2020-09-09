@@ -46,14 +46,21 @@ export default class TodoInput extends React.Component
 	{
 
 		return(
-			<div>
-				<input 
-				type = "text" 
-				value = {this.state.value} 
-				onChange = {this.changeValue}
-				onKeyPress = {this.submitTodo}/>
+			<div className = "todoInput">
+				<h2 className = "content is-large is-bold underline">Add a TODO!</h2>
+				<div className="field">
+					<div className="control">
+						<input 
+						type = "text" 
+						value = {this.state.value} 
+						onChange = {this.changeValue}
+						onKeyPress = {this.submitTodo}
+						className="input is-primary"/>
+					</div>
+				</div>
 
-				<button 
+				 <button 
+				 	className="button is-success" 
 					onClick = {this.passTodo}
 					id = "addTodo">
 				Add Todo!

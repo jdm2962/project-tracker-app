@@ -43,14 +43,26 @@ export default class TodoList extends React.Component
 		let todos = this.state.todos;
 
 		return(
-			<div>
-				<h2>TODO</h2>
-				<button onClick = {this.markDone}>
-					Mark All Done
-				</button>
-				<button onClick = {this.deleteTodos}>
-					Delete All
-				</button>
+			<div className = "" id = "todoList">
+				<h2 className = "content is-medium underline is-bold">TODO</h2>
+				<div className="field is-grouped">
+				  <p className="control">
+				    <button 
+				    	onClick = {this.markDone}
+				    	className = "button is-link is-small">
+				    		Mark All Done
+				    </button>
+				  </p>
+				  <p className="control">
+				    <button 
+				    	onClick = {this.deleteTodos}
+				    	className = "button is-danger is-small">
+				    		Clear All
+				    </button>
+				  </p>
+				</div>
+
+
 				{todos.map((todo) => {
 					return (
 						<Todo key = {todo.todoid} todo = {todo} changeIsDone = {this.props.changeIsDone}/>

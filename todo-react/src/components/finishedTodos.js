@@ -41,10 +41,26 @@ export default class FinishedTodos extends React.Component
 	{
 		let finTodos = this.state.finTodos;
 		return(
-			<div>
-				<h2>Finished List</h2>
-				<button onClick = {this.undoAll}>Undo All</button>
-				<button onClick = {this.deleteTodos}>Clear All</button>
+			<div className = "control" id = "finishedList">
+				<h2 className = "content is-medium underline is-bold">Finished List</h2>
+
+				<div className="field is-grouped">
+				  <p className="control">
+				    <button 
+				    	onClick = {this.undoAll}
+				    	className = "button is-link is-small">
+				    		Undo All
+				    </button>
+				  </p>
+				  <p className="control">
+				    <button 
+				    	onClick = {this.deleteTodos}
+				    	className = "button is-danger is-small">
+				    		Clear All
+				    </button>
+				  </p>
+				</div>
+
 				{finTodos.map(todo => 
 					<Todo 
 						todo = {todo} key = {todo.todoid} 
