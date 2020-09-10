@@ -1,14 +1,15 @@
 import React from 'react';
 
-import TodoContainer from "./components/todoContainer";
-import Header from "./components/header";
+import TodoContainer from "./components/todoCore/todoContainer";
+import Header from "./components/todoCore/header";
 
 function App() {
   return (
-    <div className = "appContainer center-vertical">
-      <Header />
-      <TodoContainer />
-    </div>
+    <>
+    	<Header />
+      	<TodoContainer />
+    </>
+
   );
 }
 

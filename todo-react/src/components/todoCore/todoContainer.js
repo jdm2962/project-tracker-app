@@ -124,6 +124,7 @@ class TodoContainer extends React.Component
 		let todos = this.state.todos;
 		return(
 			<div className = "section todoContainer" id = "todoContainer">
+
 				<div className="field is-grouped" id = "controlButtons">
 				  <p className="control">
 				    <button 
