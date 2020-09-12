@@ -6,10 +6,9 @@ import {
 	Link
 } from "react-router-dom";
 
-import TodoContainer from "./components/todoCore/todoContainer";
 import Header from "./components/todoCore/header";
 import Home from "./components/todoCore/home";
-import TodoPage from "./components/todoCore/todoPage";
+import TodoContainer from "./components/todoCore/todoContainer";
 import Login from "./components/login/login";
 import SignUp from "./components/login/signup";
 import Projects from "./components/projects/projects";
@@ -19,18 +18,14 @@ import Projects from "./components/projects/projects";
 function App() {
   return (
   	<Router>
-  		<span>
-  			<Link to = "/">Home</Link>
-  			<Link to = "/todos">Todos</Link>
-  			<Link to = "/projects">Projects</Link>
-  		</span>
+  		<Header />
 
   		<Switch>
-  			<Route>
+  			<Route path = "/projects">
   				<Projects />
   			</Route>
   			<Route path = "/todos">
-  				<TodoPage />
+  				<TodoContainer />
   			</Route>
   			<Route path = "/login">
   				<Login />

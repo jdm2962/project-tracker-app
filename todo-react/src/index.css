@@ -2,25 +2,21 @@
 {
 	margin : 0;
 	padding : 0;
-	border-spacing: border-box;
+	/*border-spacing: border-box;*/
 }
 
 html
 {
-	/*height : 100%;*/
+	height : 100%;
 }
 
 
 body
 {
-	width : 100%;
-	/*display : flex;
-	justify-content: center;
-	align-items: center;*/
+	min-height : 100%;
 	background-color : #2c3e50;
-	height : 100vh;
-	overflow : auto;
 }
+
 
 .strike
 {
@@ -44,7 +40,26 @@ body
 .hero
 {
 	width : 100%;
-	height : 15%;
+}
+
+#hero-body
+{
+	padding : 1rem 1.5rem;
+}
+
+.hero-foot
+{
+	background : #2980b9;
+}
+
+.navbar-item
+{
+	background: #2980b9;
+}
+
+#navbar-item .is-active
+{
+	background: #2980b9;
 }
 
 .hero .hero-body
@@ -94,7 +109,6 @@ body
 #todoLists
 {
 	width : 100%;
-	/*height : 100%;*/
 	display : flex;
 	margin-top : 15px;
 

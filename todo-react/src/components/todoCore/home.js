@@ -7,9 +7,11 @@ const Home = () =>
 {
 	return(
 		<div>
-			<h1>Homepage</h1>
-			<Link to = "/login">Login</Link>
-			<Link to = "/signup">Sign up!</Link>
+			<h1>Welcome!</h1>
+			<p>Create a new project!</p>
+
+			{/*<Link to = "/login">Login</Link>
+			<Link to = "/signup">Sign up!</Link>*/}
 		</div>
 	);
 };

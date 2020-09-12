@@ -1,5 +1,6 @@
 import React from "react";
 
+import NavBar from "../projects/navbar";
 
 class Header extends React.Component
 {
@@ -9,13 +10,16 @@ class Header extends React.Component
 		return(
 
 			<section className="hero is-primary is-bold">
-			  <div className="hero-body">
-			    <div className="container">
-			      <h1 className="title">
-			        TODO
-			      </h1>
-			    </div>
-			  </div>
+				<div className="hero-body" id = "hero-body">
+					<div className="container">
+						<h1 className="title">
+				        	Project Tracker
+				    	</h1>
+					</div>
+				  </div>
+				<div className = "hero-foot">
+					<NavBar />
+				</div>
 			</section>
 		);
 	}
