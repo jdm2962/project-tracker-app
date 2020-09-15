@@ -6,8 +6,8 @@ const dynamoDb = new aws.DynamoDB();
 
 /* 
 	primary key:
-		partition - project : ""
-		sort - userId : uuid
+		partition - userId : uuid
+		sort - project : ""
 	Other attriutes:
 		todos : [ of {}s]
 		dateCreated : ""
@@ -30,23 +30,23 @@ function createTable()
 		AttributeDefinitions :
 		[
 			{
-				AttributeName : "project",
-				AttributeType : "S"
-			},	
-			{
 				AttributeName : "userId",
 				AttributeType : "S"
-			}
+			},
+			{
+				AttributeName : "project",
+				AttributeType : "S"
+			}	
 		],
 
 		KeySchema : 
 		[
 			{
-				AttributeName : "project",
+				AttributeName : "userId",
 				KeyType : "HASH"
 			},
 			{
-				AttributeName : "userId",
+				AttributeName : "project",
 				KeyType : "RANGE"
 			}
 		]

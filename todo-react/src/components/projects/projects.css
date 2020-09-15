@@ -10,6 +10,17 @@
 	width : 70%;
 }
 
+#saveContainer
+{
+	display : flex;
+	justify-content : flex-end;
+}
+
+#saveContainer button
+{
+	width : 20%;
+}
+
 #buttons
 {
 	width : 80%;
@@ -31,6 +42,11 @@
 	width : 10px;
 	height : 10px;
 	padding : 5px;
+}
+
+#projectButton
+{
+	border : none;
 }
 
 .iconStyle

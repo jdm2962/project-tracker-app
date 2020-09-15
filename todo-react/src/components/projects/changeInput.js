@@ -1,5 +1,7 @@
 import React from "react";
 
+import { convertToSpaces } from "../../helpers";
+
 import "./projects.css";
 
 class ChangeInput extends React.Component
@@ -9,7 +11,7 @@ class ChangeInput extends React.Component
 		super(props);
 		this.state =
 		{
-			value : this.props.value,
+			value : convertToSpaces(this.props.value),
 		};
 
 		this.setInput = this.setInput.bind(this);

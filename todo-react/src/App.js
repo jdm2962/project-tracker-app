@@ -12,33 +12,33 @@ import TodoContainer from "./components/todoCore/todoContainer";
 import Login from "./components/login/login";
 import SignUp from "./components/login/signup";
 import Projects from "./components/projects/projects";
+import ProjectTodos from "./components/projects/projectTodos";
 
 
 
 function App() {
   return (
-  	<Router>
-  		<Header />
+	<Router>
+		<Header />
 
-  		<Switch>
-  			<Route path = "/projects">
-  				<Projects />
-  			</Route>
-  			<Route path = "/todos">
-  				<TodoContainer />
-  			</Route>
-  			<Route path = "/login">
-  				<Login />
-  			</Route>
-  			<Route path = "/signup">
-  				<SignUp />
-  			</Route>
-  			<Route path = "/">
-  				<Home />
-  			</Route>
-  		</Switch>
-  	</Router>
-  	
+		<Switch>
+			<Route path = "/projects">
+				<Projects />
+			</Route>
+			<Route path = "/project/:project" render = {props => <ProjectTodos {...props} />}>
+			</Route>
+			<Route path = "/login">
+				<Login />
+			</Route>
+			<Route path = "/signup">
+				<SignUp />
+			</Route>
+			<Route path = "/">
+		  <Home />
+			</Route>
+		</Switch>
+	</Router>
+	
   );
 }
 

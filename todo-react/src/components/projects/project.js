@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import ChangeInput from "./changeInput";
+import ProjectTodos from "./projectTodos";
+
+import { convertToSpaces } from "../../helpers";
 
 import "./projects.css";
 
 
 const Project = (props) =>
 {
-
 	const project = props.project;
 	const [editable, setEditable] = useState(false);
 	const [editInput, setEditInput] = useState("");
-	
+
+	// format project name if necessary
+	let projName = project.project;
+	if(projName.includes("^"))
+	{
+		projName = projName.replace("^", " ");
+		project.project = projName;
+	}
 
 	const makeEditable = () =>
 	{
@@ -55,11 +64,8 @@ const Project = (props) =>
 
 	const submitChanges = () =>
 	{
-		console.log(editInput, project.project);
 		if(project.project !== editInput && editInput !== "")
 		{
-
-			console.log("if");
 			let projects = props.projects;
 			let setProjects = props.setProjects;
 			let index = projects.indexOf(project)
@@ -83,6 +89,17 @@ const Project = (props) =>
 		let setProjects = props.setProjects;
 		let updatedProjects = projects.filter(proj => project.projectId !== proj.projectId);
 		setProjects(updatedProjects);
+
+		const options = 
+		{
+			method : "DELETE",
+			body : JSON.stringify(project)
+		};
+
+		fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project", options)
+			.then(res => res.json())
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
 	};
 
 	return(
@@ -125,9 +142,17 @@ const Project = (props) =>
 						setEditInput = {setEditInput}/>
 				:
 					<button 
-						className = "button is-medium"
-						style = {{backgroundColor : project.projectColor}}>
-							{project.project}
+						className = "button is-medium projectButton"
+						style = {{backgroundColor : project.projectColor, border : "none"}}>
+							<NavLink 
+									to = 
+									{{
+										pathname : `/project/${project.project}`, 
+										state: {userId : project.userId}
+									}}
+									className = "has-text-dark">
+									{convertToSpaces(project.project)}
+							</NavLink>
 					</button>
 			}
 		</div>

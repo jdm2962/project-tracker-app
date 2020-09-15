@@ -13,19 +13,17 @@ class TodoContainer extends React.Component
 	constructor(props)
 	{
 		super(props);
-
 		this.state = 
 		{
-			todos : [],
+			todos : this.props.todos || [],
 		};
+
 
 		this.addTodo = this.addTodo.bind(this);
 		this.changeIsDone = this.changeIsDone.bind(this);
 		this.markAllDone = this.markAllDone.bind(this);
 		this.undoAll = this.undoAll.bind(this);
 		this.deleteTodos = this.deleteTodos.bind(this);
-		this.saveToDb = this.saveToDb.bind(this);
-		this.clear = this.clear.bind(this);
 	}
 
 
@@ -46,7 +44,7 @@ class TodoContainer extends React.Component
 				datecreated : moment().format("YYYY-MM-DD hh:mm:ss")
 			}
 			newTodos.push(newTodo);
-			this.setState({todos : newTodos});
+			this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 		}
 		
 	}
@@ -92,30 +90,19 @@ class TodoContainer extends React.Component
 		this.setState({todos : newTodos});
 	}
 
-	saveToDb()
-	{
-		let options = 
-		{
-			method : "POST",
-			body : JSON.stringify(this.state.todos)
-		};
-		fetch("https://1rmebtk837.execute-api.us-east-1.amazonaws.com/test-1/todos/save", options)
-			.then(res => res.json())
-			.then(data => console.log(data))
-			.catch(err => console.log(err))
-	}
-
-	clear()
-	{
-		this.setState({todos : []});
-		setTimeout(() => this.saveToDb(), 500);
-	}
 	
 	componentDidMount()
 	{
-		fetch("https://1rmebtk837.execute-api.us-east-1.amazonaws.com/test-1/todos")
-			.then(res => res.json())
-			.then(data => this.setState({todos : data}))
+		let title = document.querySelector("#title");
+		title.innerHTML = "TODOS";
+	}
+
+	componentDidUpdate(prevState, prevProps)
+	{
+		if(this.props.todos !== prevProps.todos)
+		{
+			this.setState({todos : this.props.todos});
+		}
 	}
 
 
@@ -123,26 +110,7 @@ class TodoContainer extends React.Component
 	{
 		let todos = this.state.todos;
 		return(
-			<div className = "section todoContainer" id = "todoContainer">
-
-				<div className="field is-grouped" id = "controlButtons">
-				  <p className="control">
-				    <button 
-				    	onClick = {this.saveToDb}
-				    	className = "button is-link"
-				    	id = "saveButton">
-				    		Save All
-				    </button>
-				  </p>
-				  <p className="control">
-				    <button 
-				    	onClick = {this.clear}
-				    	className = "button is-danger">
-				    		Clear All
-				    </button>
-				  </p>
-				</div>
-
+			<div className = "section todoContainer" id = "todoContainer" key = {this.props.todos}>
 				<TodoInput addTodo = {this.addTodo}/>
 				<div className = "" id = "todoLists">
 					<TodoList 
