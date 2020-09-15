@@ -38,7 +38,6 @@ const ProjectTodos = (props) =>
 	const updateProjectTodos = (todos) =>
 	{
 		let updatedProject = {...currentProject};
-		console.log(updatedProject);
 		updatedProject.todos = todos;
 		setCurrentProject(updatedProject);
 
@@ -46,9 +45,12 @@ const ProjectTodos = (props) =>
 
 	useEffect(() =>
 	{
+		// fetch project and all its properties
+			// sets project on project todos page
 		fetch(url)
 			.then(res => res.json())
-			.then(data => setCurrentProject(data))
+			.then(data => setCurrentProject(data)
+)
 			.catch(err => console.log(err))
 	}, []);
 

@@ -6,8 +6,8 @@ import {
 	Link
 } from "react-router-dom";
 
-import Header from "./components/todoCore/header";
-import Home from "./components/todoCore/home";
+import Header from "./components/main/header";
+import Home from "./components/main/home";
 import TodoContainer from "./components/todoCore/todoContainer";
 import Login from "./components/login/login";
 import SignUp from "./components/login/signup";

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
 
 import "./projects.css";
@@ -8,6 +8,8 @@ import ToggleProjectButton from "./toggleProjectButton";
 import ProjectInput from "./projectInput";
 
 import { formatSpaces } from "../../helpers";
+import { convertToSpaces } from "../../helpers";
+import { sortByDate } from "../../helpers";
 
 
 const moment = require("moment");
@@ -18,6 +20,9 @@ const Projects = () =>
 	const [projects, setProjects] = useState([]);
 	const [color, setColor] = useState("#e67e22");
 	const [isHidden, setIsHidden] = useState(true);
+	const [isNewProject, setIsNewProject] = useState(true);
+
+	const alreadyExists = useRef();
 	
 
 	//**** TEMPORARY GET FROM LOGGED IN USER LATER
@@ -36,7 +41,9 @@ const Projects = () =>
 			.then(res => res.json())
 			.then(data => 
 			{
-				setProjects(data);
+				// sort projects
+				let sortedProjects = sortByDate(data);
+				setProjects(sortedProjects);
 			})
 			.catch(err => console.log(err))		
 	}, [userId]);
@@ -47,39 +54,60 @@ const Projects = () =>
 		
 		let modifiedValue = formatSpaces(value);
 		let modifiedProject;
-		
+		let isNewProj = isNewProject;
+
+		// don't add if empty string
 		if(value !== "")
 		{
-			let newProjects = [...projects];
-			let newProject = 
+			// check whether project already exists
+			projects.forEach(project => 
 			{
-				userId : "1",
-				project : value.trim(),
-				projectId : v4(),
-				projectColor : color,
-				dateCreated : moment().format("YYYY-MM-DD hh:mm:ss"),
-				todos : []
-			}
-			newProjects.push(newProject);
-			setProjects(newProjects);
-
-
-			// send modified project to server
-			modifiedProject = {...newProject};
-			modifiedProject.project = modifiedValue;
-			let options = 
-			{
-				method : "POST",
-				body : JSON.stringify(modifiedProject)
-			};
-			fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project/", options)
-				.then(res => res.json())
-				.then(data => 
+				if(value === convertToSpaces(project.project))
 				{
-					console.log(data);
-					setValue("");
-				})
-				.catch(err => console.log(err))
+					setIsNewProject(false);
+					isNewProj = false;
+				}
+			});
+
+			if(isNewProj)
+			{
+
+				let newProjects = [...projects];
+				let newProject = 
+				{
+					userId : "1",
+					project : value.trim(),
+					projectId : v4(),
+					projectColor : color,
+					dateCreated : moment().format("YYYY-MM-DD hh:mm:ss"),
+					todos : []
+				}
+				newProjects.push(newProject);
+				setProjects(newProjects);
+
+
+				// send modified project to server
+				modifiedProject = {...newProject};
+				modifiedProject.project = modifiedValue;
+				let options = 
+				{
+					method : "POST",
+					body : JSON.stringify(modifiedProject)
+				};
+				fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project/", options)
+					.then(res => res.json())
+					.then(data => 
+					{
+						console.log(data);
+						setValue("");
+					})
+					.catch(err => console.log(err))
+			}
+			else
+			{
+				alreadyExists.current.classList.remove("is-hidden")
+				return;
+			}
 
 		}
 	};
@@ -100,6 +128,13 @@ const Projects = () =>
 	const changeInput = (event) =>
 	{
 		setValue(event.target.value);
+		
+		// toggle "Project already Exists span if necessary"
+		if(!isNewProject)
+		{
+			setIsNewProject(true);
+			alreadyExists.current.classList.add("is-hidden");
+		}
 	};
 
 	
@@ -108,9 +143,16 @@ const Projects = () =>
 		<div className = "section pt-4" id = "projects">
 			<h1 className = "title is-2 is-bold has-text-light mb-5">Projects</h1>
 			{/*<h3 className = "title is-6 has-text-light mb-2">Add a Project:</h3>*/}
-			<ToggleProjectButton 
-				isHidden = {isHidden} 
-				setIsHidden = {setIsHidden}/>
+			<div>
+				<ToggleProjectButton 
+					isHidden = {isHidden} 
+					setIsHidden = {setIsHidden}/>
+				<span 
+					className = "has-text-danger content ml-6 is-size-3 has-text-weight-bold is-hidden"
+					ref = {alreadyExists}>
+						Project Already Exists
+				</span>
+			</div>
 			<ProjectInput 
 				isHidden = {isHidden}
 				value = {value}

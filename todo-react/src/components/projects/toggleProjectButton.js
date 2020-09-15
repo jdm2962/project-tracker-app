@@ -28,7 +28,7 @@ const ToggleProjectButton = (props) =>
 				cancelVisible 
 				?
 					<button 
-						className = "button is-danger"
+						className = "button is-danger mb-4"
 						onClick = {toggleCancelButton}>
 							Cancel
 					</button>

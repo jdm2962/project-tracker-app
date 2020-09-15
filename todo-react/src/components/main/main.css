@@ -1,0 +1,11 @@
+.navbar-item, .navbar-link
+{
+	justify-content : center;
+	padding : 0 .5rem;
+	width : 50%;
+}
+
+.navbar-start
+{
+	width : 25%;
+}

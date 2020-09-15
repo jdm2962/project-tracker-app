@@ -28,7 +28,7 @@ const NavBar = () =>
 					<div className = "navbar-start">
 						<NavLink to = "/" id = "navbar-item" className = "navbar-item" exact activeClassName = "is-active">Home</NavLink>
 						<NavLink to = "/projects"  id = "navbar-item" className = "navbar-item" activeClassName = "is-active">Projects</NavLink>
-						<NavLink to = "/Todos"  id = "navbar-item" className = "navbar-item" activeClassName = "is-active">Todos</NavLink>
+						
 					</div>
 				</div>
 			</nav>

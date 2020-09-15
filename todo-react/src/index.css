@@ -44,12 +44,13 @@ body
 
 #hero-body
 {
-	padding : 1rem 1.5rem;
+	padding : .75rem 1rem;
 }
 
 .hero-foot
 {
 	background : #2980b9;
+	padding : 0;
 }
 
 .navbar-item

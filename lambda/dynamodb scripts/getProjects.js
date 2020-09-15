@@ -16,7 +16,8 @@ function getProjects(userId)
 			":uId" : {S : userId}
 		},
 		KeyConditionExpression : "userId = :uId", 
-		ProjectionExpression : "userId, project"
+		ExpressionAttributeNames : {"#P" : "project"},
+		ProjectionExpression : "userId, #P, projectColor, projectId, dateCreated"
 	};
 
 	return new Promise((resolve, reject) =>

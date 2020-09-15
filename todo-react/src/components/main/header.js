@@ -1,6 +1,9 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-import NavBar from "../projects/navbar";
+import "./main.css";
+
+import NavBar from "../main/navbar";
 
 class Header extends React.Component
 {
@@ -13,7 +16,14 @@ class Header extends React.Component
 				<div className="hero-body" id = "hero-body">
 					<div className="container">
 						<h1 className="title">
-				        	Project Tracker
+							<NavLink
+								to = "/home"
+								className = "has-text-white">
+									<span className = "icon mr-3">
+										<i class="fas fa-tasks"></i>
+									</span>
+						        	Project Tracker
+					        </NavLink>
 				    	</h1>
 					</div>
 				  </div>
