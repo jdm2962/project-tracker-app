@@ -31,6 +31,7 @@
 	padding : .25rem;
 }
 
+
 .editButtons
 {
 	display : flex;
@@ -74,4 +75,53 @@
 .project *
 {
 	border : none;
+}
+
+#controlButtons
+{
+	margin-top : 1.5rem;
+	margin-bottom : 1rem;
+	width : 90%;
+}
+
+#addTodoBtnContainer
+{
+	margin-right : auto;
+	margin : 0 auto 0 5rem;
+}
+
+#saveButton
+{
+	margin-left : auto;
+}
+
+/*input placeholder*/
+
+::placeholder
+{
+	/* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: red;
+  	opacity: 1;
+}
+
+:-ms-input-placeholder 
+{ 
+	/* Internet Explorer 10-11 */
+  	color: red;
+}
+
+::-ms-input-placeholder
+{
+  /* Microsoft Edge */
+  color: red;
+}
+
+
+
+@media only screen and (max-width : 600px)
+{
+	#controlButtons
+	{
+		margin : 0;
+	}
 }

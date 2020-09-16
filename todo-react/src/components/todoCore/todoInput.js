@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./todos.css";
+
 export default class TodoInput extends React.Component
 {
 	constructor(props)
@@ -8,7 +10,9 @@ export default class TodoInput extends React.Component
 
 		this.state = 
 		{
-			value : ""
+			value : "",
+			inputIsVisible : this.props.inputIsVisible,
+			setInputIsVisible : this.props.setInputIsVisible
 		};
 
 		this.changeValue = this.changeValue.bind(this);
@@ -41,13 +45,20 @@ export default class TodoInput extends React.Component
 		}
 	}
 
+	componentDidUpdate(prevState, prevProp)
+	{
+		if(this.props.inputIsVisible !== prevProp.inputIsVisible)
+		{
+			this.setState({inputIsVisible : this.props.inputIsVisible});
+		}
+	}
 
 	render()
 	{
+		let isVisible = this.state.inputIsVisible;
 
 		return(
-			<div className = "todoInput">
-				<h2 className = "content is-large is-bold underline">Add a TODO!</h2>
+			<div className = {isVisible ? "todoInput mb-2" : "todoInput is-hidden"}>
 				<div className="field">
 					<div className="control">
 						<input 
@@ -55,7 +66,8 @@ export default class TodoInput extends React.Component
 						value = {this.state.value} 
 						onChange = {this.changeValue}
 						onKeyPress = {this.submitTodo}
-						className="input is-primary"/>
+						className="input is-primary textInput"
+						placeholder = "Add a TODO!"/>
 					</div>
 				</div>
 

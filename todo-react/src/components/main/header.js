@@ -20,7 +20,7 @@ class Header extends React.Component
 								to = "/home"
 								className = "has-text-white">
 									<span className = "icon mr-3">
-										<i class="fas fa-tasks"></i>
+										<i className="fas fa-tasks"></i>
 									</span>
 						        	Project Tracker
 					        </NavLink>

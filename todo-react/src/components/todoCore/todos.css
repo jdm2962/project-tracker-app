@@ -1,0 +1,118 @@
+.strike
+{
+	text-decoration-line : line-through;
+}
+
+.underline
+{
+	text-decoration-line : underline;
+}
+
+#todoContainer
+{
+	width : 90%;
+	height : 100vh;
+	display : flex;
+	align-items: center;
+	flex-direction: column;
+	padding : 1rem 1rem;
+}
+
+
+.todoInput
+{
+	width: 90%;
+	display : flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.todoInput .field
+{
+	width : 80%;
+	display : flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todoInput .field .control
+{
+	display : flex;
+	align-items: center;
+	justify-content: center;
+	width : 100%
+}
+
+.todoInput input 
+{
+	width : 85%;
+}
+
+.todoInput button
+{
+	width : 50%;
+}
+
+#todoLists
+{
+	width : 100%;
+	display : flex;
+	margin-top : 15px;
+
+}
+
+#todoList
+{
+	width : 50%;
+	margin-left : 15px;
+	margin-right : 15px;
+	display : flex;
+	flex-direction: column;
+	align-items: center;
+	border-right : 1px solid white;
+
+}
+
+#finishedList
+{
+	width : 50%;
+	display : flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left : 15px;
+}
+
+#todo
+{
+	width : 100%;
+}
+
+#todo span
+{
+	margin-left : 15px;
+	word-wrap : break-word;
+}
+
+
+@media only screen and (max-width : 600px)
+{
+
+
+	#todoContainer
+	{
+		padding : 5px;
+	}
+
+	#todoLists
+	{
+		flex-direction : column;
+		align-items: center;
+	}
+
+
+	.todoInput
+	{
+		margin-bottom : 5px;
+	}
+}

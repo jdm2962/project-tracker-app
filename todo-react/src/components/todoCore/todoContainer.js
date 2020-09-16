@@ -3,6 +3,7 @@ import React from "react";
 import {v4} from "uuid"
 import moment from "moment";
 
+import "./todos.css";
 
 import TodoInput from "./todoInput"
 import TodoList from "./todoList";
@@ -55,7 +56,7 @@ class TodoContainer extends React.Component
 		// create a new list of todos with the updated todo
 		let newTodos = todos.filter(oldTodo => oldTodo.todoid !== todo.todoid);
 		newTodos.push(todo);
-		this.setState({todos : newTodos});
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
 	markAllDone()
@@ -65,7 +66,7 @@ class TodoContainer extends React.Component
 				todo.isdone = true;
 				return todo;
 			});
-		this.setState({todos : newTodos});
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
 	undoAll()
@@ -75,7 +76,7 @@ class TodoContainer extends React.Component
 				todo.isdone = false;
 				return todo;
 			});
-		this.setState({todos : newTodos});
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
 	deleteTodos(todos)
@@ -87,7 +88,7 @@ class TodoContainer extends React.Component
 			currentTodos.splice(currentTodos.indexOf(todo), 1);
 		});
 		newTodos = [...currentTodos];
-		this.setState({todos : newTodos});
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
 	
@@ -111,7 +112,10 @@ class TodoContainer extends React.Component
 		let todos = this.state.todos;
 		return(
 			<div className = "section todoContainer" id = "todoContainer" key = {this.props.todos}>
-				<TodoInput addTodo = {this.addTodo}/>
+				<TodoInput 
+					addTodo = {this.addTodo}
+					inputIsVisible = {this.props.inputIsVisible}
+					setinputIsVisible = {this.props.setInputIsVisible}/>
 				<div className = "" id = "todoLists">
 					<TodoList 
 						todos = {todos.filter(todo => !todo.isdone)} 
