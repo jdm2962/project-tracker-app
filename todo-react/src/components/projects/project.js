@@ -15,21 +15,19 @@ const Project = (props) =>
 	const project = props.project;
 
 	return(
-		<div id = "projectContainer">
-			<button 
-				className = "button is-medium projectButton"
-				style = {{backgroundColor : project.projectColor, border : "none"}}>
-					<NavLink 
-							to = 
-							{{
-								pathname : `/project/${project.project}/${project.projectId}`, 
-								state: {project : project}
-							}}
-							className = "has-text-dark">
-							{convertToSpaces(project.project)}
-					</NavLink>
-			</button>
-		</div>
+		<button 
+			className = " projectButton"
+			style = {{backgroundColor : project.projectColor, border : "none"}}>
+				<NavLink 
+						to = 
+						{{
+							pathname : `/project/${project.project}/${project.projectId}`, 
+							state: {project : project}
+						}}
+						className = "has-text-dark">
+						{convertToSpaces(project.project)}
+				</NavLink>
+		</button>
 	);
 };
 
