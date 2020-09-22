@@ -1,0 +1,93 @@
+
+// Variables
+$backgroundColor : #2c3e50;
+$borderColor : #ecf0f1;
+$activeLinkColor : #34495e;
+$fontColor : #3c6382;
+$hoverFontColor : #60a3bc;
+//
+
+.hero
+{
+	width : 100%;
+}
+
+#hero-body
+{
+	padding : .75rem .75rem;
+	// border-bottom : 1px solid $borderColor;
+}
+
+.heroTitle
+{
+	display : flex;
+	align-items : flex-end;
+	font-size : 1.5rem;
+}
+
+.heroTitle::hover
+{
+	background: $hoverFontColor;
+	
+}
+
+.heroNavTitle
+{
+	color : $fontColor;
+}
+
+.icon
+{
+	color : $fontColor;
+}
+
+
+.heroNavTitle:hover
+{
+	color : $hoverFontColor;
+}
+
+
+.is-active
+{
+	
+}
+
+.isActive
+{
+	color : red;
+}
+
+.navbar
+{
+	width : 50%;
+	margin-left : auto
+}
+
+
+.navbar-end
+{
+	width : 100%;
+}
+
+.linkContainer
+{
+	display : flex;
+	width : 20%;
+	align-items : flex-end;
+}
+
+.navbarItem
+{
+	color : $fontColor;
+	text-align : center;
+	font-size : 1.2rem;
+	font-weight : 400;
+}
+
+
+.navbarItem:hover
+{
+	color : $hoverFontColor;
+}
+

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-// import "./todos.css";
-
 import TodoContainer from "../todoCore/todoContainer";
+import ProjectSettings from "./projectSettings";
 
 import {formatSpaces} from "../../helpers";
 import {convertToSpaces} from "../../helpers";
@@ -11,15 +10,17 @@ import {convertToSpaces} from "../../helpers";
 const ProjectTodos = (props) =>
 {	
 	// let project = props.location.state.project;
-	const { project } = useParams();
-	const { userId } = props.location.state;
+	// const { project } = useParams();
+	// let project = props.location.state.project;
+	let projectInfo = props.location.pathname.split("/");
+	let project = projectInfo[2];
+	let projectId = projectInfo[3];
+	console.log(projectInfo);
 
-	const formattedProject = formatSpaces(project);
-	const url = "https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project/" + userId + "/" + formattedProject;
-
-	const [currentProject, setCurrentProject] = useState({});
+	const [currentProject, setCurrentProject] = useState(project);
 	const [inputIsVisible, setInputIsVisible] = useState(false);
 	const [isCancelButton, setIsCancelButton] = useState(false);
+	const [settingsIsVisible, setSettingsIsVisible] = useState(false);
 
 	const saveToDb = () =>
 	{
@@ -62,7 +63,51 @@ const ProjectTodos = (props) =>
 		let updatedProject = {...currentProject};
 		updatedProject.todos = todos;
 		setCurrentProject(updatedProject);
+		// set local storage
+		let projects = JSON.parse(localStorage.getItem("projects"));
+		projects.forEach(proj => 
+		{
+			if(proj.project === updatedProject.project)
+			{
+				projects[projects.indexOf(proj)] = updatedProject;
+			}
+		});
 
+		localStorage.setItem("projects", JSON.stringify(projects));
+
+	};
+
+	const updateProjectName = (projectName) =>
+	{
+		let oldProject = {...currentProject};
+		let updatedProject = {...currentProject};
+		updatedProject.project = formatSpaces(projectName);
+		let projs = {};
+		projs.oldProject = oldProject;
+		projs.updatedProject = updatedProject;
+		setCurrentProject(updatedProject);
+		// set local storage
+		let currentProjects = JSON.parse(localStorage.getItem("projects"));
+		let updatedProjects;
+		currentProjects.forEach(project => 
+		{
+			if(project.project === oldProject.project)
+			{
+				updatedProjects = [...currentProjects];
+				updatedProjects[currentProjects.indexOf(project)] = updatedProject;
+				localStorage.setItem("projects", JSON.stringify(updatedProjects));
+			}
+		});
+		// update db
+		const options = 
+		{
+			method : "PUT",
+			body : JSON.stringify(projs)
+		}
+		fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project", options)
+			.then(res => res.json())
+			.then(data => console.log(data))
+			.catch(err => console.log(err))
 	};
 
 	const toggleInputVisible = () =>
@@ -71,20 +116,52 @@ const ProjectTodos = (props) =>
 		setIsCancelButton(!isCancelButton);
 	};
 
+	const toggleSettings = () => 
+	{
+		setSettingsIsVisible(!settingsIsVisible);
+	};
+
 	useEffect(() =>
 	{
-		// fetch project and all its properties
-			// sets project on project todos page
-		fetch(url)
-			.then(res => res.json())
-			.then(data => setCurrentProject(data)
-)
-			.catch(err => console.log(err))
+		// load from local storage
+		let projects = JSON.parse(localStorage.getItem("projects"));
+		projects.forEach(proj =>
+		{
+			if(proj.projectId === projectId)
+			{
+				setCurrentProject(proj);
+			}
+		});
+		let title = document.querySelector("#title");
+		title.innerHTML = convertToSpaces(convertToSpaces(project));
+
 	}, []);
 
+
 	return(
-		<>
-			<h2 className = "title mt-4 has-text-light">{convertToSpaces(project)}</h2>
+		<div 
+			className = "section has-background-light" 
+			id = "projectTodos">
+			<div id = "projectBar">
+				<h2 
+					className = "content mt-4 projectName">
+							{currentProject.project ? convertToSpaces(currentProject.project) : ""}
+				</h2>
+				<button 
+					className = "button" id = "cog"
+					onClick = {toggleSettings}>
+					<span className = "icon">
+						<i className="fas fa-cog"></i>
+					</span>
+				</button>
+			</div>
+
+			<ProjectSettings 
+				projectName = {currentProject.project}
+				updateProjectName = {updateProjectName}
+				saveToDb = {saveToDb}
+				settingsIsVisible = {settingsIsVisible}
+				setSettingsIsVisible = {setSettingsIsVisible}/>
 			
 			<div className="field is-grouped mr-6" id = "controlButtons">
 				<p className="control" id = "addTodoBtnContainer">
@@ -94,14 +171,14 @@ const ProjectTodos = (props) =>
 						<button 
 							onClick = {toggleInputVisible}
 							className = "button is-danger"
-							id = "addTodoButton">
+							id = "cancelTodoButton">
 								Cancel
 						</button>
 
 					:
 						<button 
 							onClick = {toggleInputVisible}
-							className = "button is-success"
+							className = "button is-link"
 							id = "addTodoButton">
 								Add a Todo!
 						</button>
@@ -131,7 +208,7 @@ const ProjectTodos = (props) =>
 				updateProjectTodos = {updateProjectTodos}
 				inputIsVisible = {inputIsVisible}
 				setinputIsVisible = {setInputIsVisible}/>
-		</>
+		</div>
 		);
 
 };

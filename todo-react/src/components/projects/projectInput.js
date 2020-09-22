@@ -18,6 +18,12 @@ const ProjectInput = (props) =>
 		textInput.current.focus();		
 	});
 
+	const exitProjectInput = (event) =>
+	{
+		let exitInput = props.exitInput;
+		exitInput(event);
+	};
+
 
 	return(
 
@@ -25,15 +31,16 @@ const ProjectInput = (props) =>
 			<div className="control is-flex">
 				<input 
 					ref = {textInput}
-					className="input is-primary mr-4" 
+					className="input mr-4" 
 					type="text" 
 					placeholder="Enter a project name!" 
 					id = "projectInput" 
 					onChange = {changeInput} 
+					onKeyUp = {exitProjectInput}
 					onKeyPress = {keyAddProject}
 					value = {value}/>
 				<button 
-					className = "button is-primary" 
+					className = "button is-link" 
 					id = "addProject"
 					onClick = {addProject}>
 						Add Project

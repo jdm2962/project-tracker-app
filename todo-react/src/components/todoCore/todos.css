@@ -10,12 +10,11 @@
 
 #todoContainer
 {
-	width : 90%;
-	height : 100vh;
+	width : 100%;
 	display : flex;
 	align-items: center;
 	flex-direction: column;
-	padding : 1rem 1rem;
+	padding : 1rem .2rem;
 }
 
 
@@ -65,13 +64,12 @@
 #todoList
 {
 	width : 50%;
-	margin-left : 15px;
-	margin-right : 15px;
+	margin-left : 1rem;
 	display : flex;
 	flex-direction: column;
 	align-items: center;
-	border-right : 1px solid white;
-
+	border-right : 1px solid #6a89cc;
+	padding-right : 1.5rem;
 }
 
 #finishedList
@@ -80,18 +78,92 @@
 	display : flex;
 	flex-direction: column;
 	align-items: center;
-	margin-left : 15px;
+	margin-right : 1rem;
+	padding-left : 1.3rem;
 }
 
 #todo
 {
 	width : 100%;
+	margin : .5rem 0;
+	background-color : #dcdde1;
+	border-radius : 10px;
 }
 
-#todo span
+#todo input
 {
-	margin-left : 15px;
-	word-wrap : break-word;
+	margin-left : 1rem;
+}
+
+#todo div
+{
+	margin-left : 1rem;
+	overflow-wrap: break-word;
+}
+
+#todo:hover
+{
+	background-color : #a5b1c2;
+	border : .5px solid grey;
+}
+
+#editTodo
+{
+	width : 100%;
+	background-color : #dcdde1;
+	border-radius : 10px;
+	margin : .5rem 0;
+	border : .5px solid grey;
+}
+
+#editTodoInput
+{
+	margin : .5rem .5rem;
+}
+
+#editTodoInput textarea
+{
+	align-self : center;
+	height : 50%;
+	width : 100%;
+	resize : none;
+}
+
+#editTodoButtons
+{
+	margin-left : .5rem;
+	margin-top : .5rem;
+}
+
+#editTodoButtons button
+{
+	height : 2.2rem;
+	width : 2.2rem;
+	border : none;
+}
+
+#editTodoButtons .deleteBtn
+{
+	margin-left : auto;
+	margin-right : .5rem;
+}
+
+#editTodoButtons button:hover
+{
+	background-color : #a5b1c2;
+}
+
+#changeOrderButtons
+{
+	align-self : center;
+	margin-left : .5rem;
+	display : flex;
+	flex-direction : column;
+}
+
+#changeOrderButtons button
+{
+	margin-left : auto;
 }
 
 

@@ -1,0 +1,7 @@
+@use "header" as *;
+
+.projectName
+{
+	@include $fontColor
+	color : $fontColor;
+}

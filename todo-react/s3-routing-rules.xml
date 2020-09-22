@@ -1,0 +1,20 @@
+<RoutingRules>
+    <RoutingRule>
+        <Condition>
+            <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
+        </Condition>
+        <Redirect>
+            <HostName>todo.learntoprogramstuff.com</HostName>
+            <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
+        </Redirect>
+    </RoutingRule>
+    <RoutingRule>
+        <Condition>
+            <HttpErrorCodeReturnedEquals>403</HttpErrorCodeReturnedEquals>
+        </Condition>
+        <Redirect>
+            <HostName>todo.learntoprogramstuff.com</HostName>
+            <ReplaceKeyPrefixWith>#!/</ReplaceKeyPrefixWith>
+        </Redirect>
+    </RoutingRule>
+</RoutingRules>

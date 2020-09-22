@@ -42,7 +42,7 @@ export default class FinishedTodos extends React.Component
 		let finTodos = this.state.finTodos;
 		return(
 			<div className = "control" id = "finishedList">
-				<h2 className = "content is-medium underline is-bold">Finished List</h2>
+				<h2 className = "content is-bold">Finished List</h2>
 
 				<div className="field is-grouped">
 				  <p className="control">
@@ -64,8 +64,10 @@ export default class FinishedTodos extends React.Component
 				{finTodos.map(todo => 
 					<Todo 
 						todo = {todo} key = {todo.todoid} 
-						changeIsDone = {this.props.changeIsDone} 
-					/>
+						changeIsDone = {this.props.changeIsDone}
+						deleteTodo = {this.props.deleteTodo}
+						updateTodo = {this.props.updateTodo}
+						moveTodo = {this.props.moveTodo}/>
 				)}
 			</div>
 		);

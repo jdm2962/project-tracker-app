@@ -1,6 +1,109 @@
+#projectTodos
+{
+	width : 90%;
+	min-height : 100vh;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	padding : 1.5rem 1rem;
+	border-radius : 15px;
+	margin-bottom : 1rem;
+}
+
+.projectName
+{
+	margin-left : 1.2rem;
+	font-size : 1.15rem;
+	font-weight : 700;
+}
+
+.projectsH2
+{
+	margin-left : 1.2rem;
+	font-size : 1.15rem;
+	font-weight : 700;
+}
+
+#projectBar
+{
+	width : 100%;
+	display : flex;
+	justify-content: center;
+	align-items : center;
+}
+
+#projectBar #cog
+{
+	margin-left : auto;
+	margin-right : 1rem;
+	background-color : #dcdde1;
+}
+
+#projectBar #cog:hover
+{
+	background-color : #d1d8e0;
+}
+
+#projectSettings
+{
+	width : 35%;
+	height : 40%;
+	display : flex;
+	flex-direction : column;
+	position : absolute;
+	z-index : 2;
+	top : 11rem;
+	right : 7rem;
+	background-color : #dcdde1;
+	box-shadow : 10px 10px 25px grey;
+}
+
+#exitProjectSettings
+{
+	margin-left : auto;
+}
+
+#projectSettings h3
+{
+	align-self : center;
+}
+
+#projectSettings button
+{
+	background-color : #d1d8e0;
+	border : none;
+}
+
+#projectSettings button:hover
+{
+	background-color: #a5b1c2;
+}
+
+#projectSettings input
+{
+	margin-top : 1rem;
+}
+
+#projectSettings .icon
+{
+	width : .5rem;
+	height : .5rem;
+}
+
+#projectSettings .icon .check
+{
+	color : #20bf6b;
+}
+
+#projectSettings .icon .exit
+{
+	color : #eb2f06;
+}
+
 #projects
 {
 	width : 100%;
+	/*min-height : 75vh;*/
 	display : flex;
 	flex-direction : column;
 }

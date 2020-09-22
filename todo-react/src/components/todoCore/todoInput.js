@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createRef} from "react";
 
 import "./todos.css";
 
@@ -7,6 +7,7 @@ export default class TodoInput extends React.Component
 	constructor(props)
 	{
 		super(props);
+		this.inputRef = createRef();
 
 		this.state = 
 		{
@@ -16,8 +17,9 @@ export default class TodoInput extends React.Component
 		};
 
 		this.changeValue = this.changeValue.bind(this);
-		this.passTodo = this.passTodo.bind(this);
+		this.passTodoUp = this.passTodoUp.bind(this);
 		this.submitTodo = this.submitTodo.bind(this);
+		this.exitTodoInput = this.exitTodoInput.bind(this);
 	}
 
 	changeValue(event)
@@ -25,7 +27,7 @@ export default class TodoInput extends React.Component
 		this.setState({value : event.target.value})
 	}
 
-	passTodo()
+	passTodoUp()
 	{
 		let value = this.state.value;
 		let addTodo = this.props.addTodo;
@@ -45,12 +47,23 @@ export default class TodoInput extends React.Component
 		}
 	}
 
+	exitTodoInput(event)
+	{
+		let keyCode = event.keyCode || event.which;
+		if(keyCode === 27)
+		{
+			document.getElementById("cancelTodoButton").click();
+		}
+	}
+
 	componentDidUpdate(prevState, prevProp)
 	{
 		if(this.props.inputIsVisible !== prevProp.inputIsVisible)
 		{
 			this.setState({inputIsVisible : this.props.inputIsVisible});
 		}
+
+		this.inputRef.current.focus();
 	}
 
 	render()
@@ -62,18 +75,21 @@ export default class TodoInput extends React.Component
 				<div className="field">
 					<div className="control">
 						<input 
+						autoFocus = {true}
+						ref = {this.inputRef}
 						type = "text" 
 						value = {this.state.value} 
 						onChange = {this.changeValue}
 						onKeyPress = {this.submitTodo}
+						onKeyUp = {this.exitTodoInput}
 						className="input is-primary textInput"
 						placeholder = "Add a TODO!"/>
 					</div>
 				</div>
 
 				 <button 
-				 	className="button is-success" 
-					onClick = {this.passTodo}
+				 	className="button is-link" 
+					onClick = {this.passTodoUp}
 					id = "addTodo">
 				Add Todo!
 				</button>

@@ -29,12 +29,13 @@ const ToggleProjectButton = (props) =>
 				?
 					<button 
 						className = "button is-danger mb-4"
+						id = "projectCancel"
 						onClick = {toggleCancelButton}>
 							Cancel
 					</button>
 				:
 					<button 
-						className = "button is-primary"
+						className = "button is-link"
 						onClick = {toggleAddProject}>
 							Add a Project
 					</button>

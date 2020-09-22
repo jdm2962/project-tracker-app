@@ -3,10 +3,11 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
+	Link,
 } from "react-router-dom";
 
 import Header from "./components/main/header";
+import Footer from "./components/main/footer";
 import Home from "./components/main/home";
 import TodoContainer from "./components/todoCore/todoContainer";
 import Login from "./components/login/login";
@@ -37,8 +38,9 @@ function App() {
 		  <Home />
 			</Route>
 		</Switch>
+
+		<Footer />
 	</Router>
-	
   );
 }
 

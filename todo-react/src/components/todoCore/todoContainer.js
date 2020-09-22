@@ -25,6 +25,9 @@ class TodoContainer extends React.Component
 		this.markAllDone = this.markAllDone.bind(this);
 		this.undoAll = this.undoAll.bind(this);
 		this.deleteTodos = this.deleteTodos.bind(this);
+		this.deleteTodo = this.deleteTodo.bind(this);
+		this.updateTodo = this.updateTodo.bind(this);
+		this.moveTodo = this.moveTodo.bind(this);
 	}
 
 
@@ -48,6 +51,19 @@ class TodoContainer extends React.Component
 			this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 		}
 		
+	}
+
+	deleteTodo(todo)
+	{
+		let newTodos = [...this.state.todos];
+		newTodos.forEach((currentTodo, index) =>
+		{
+			if(currentTodo.todo === todo)
+			{
+				newTodos.splice(index, 1);
+			}
+		});
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
 	changeIsDone(todo)
@@ -91,6 +107,126 @@ class TodoContainer extends React.Component
 		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
 	}
 
+	updateTodo(todo, newTodo)
+	{
+		let newTodos = [...this.state.todos];
+		newTodos.forEach((currentTodo, index) => 
+		{
+			if(currentTodo.todo === todo)
+			{
+				newTodos[index].todo = newTodo;
+			}
+		});
+
+		this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
+	}
+
+	swapTodos(todo, todos, where)
+	{
+		let updatedTodos = [...todos]; 
+		let todoIndex;
+		let swapIndex;
+		let swapTodo;
+		let top = false;
+		let bottom = false;
+
+		todos.forEach((currentTodo, index) =>
+		{
+			if(currentTodo.todoid === todo.todoid)
+			{
+				todoIndex = index;
+				if(todoIndex === 0 && where === "up")
+				{
+					// todo is at the top of list already
+					top = true;
+					return;
+				}
+				else
+				{
+					if(where === "up")
+					{
+						swapIndex = index -1;
+						swapTodo = todos[swapIndex];	
+					}
+					else 
+					{
+						// intent is to move down
+						// check if already at bottom
+						if(index === todos.length - 1)
+						{
+							bottom = true;
+							return;
+						}
+						else
+						{
+							swapIndex = index +1;
+							swapTodo = todos[swapIndex];
+						}
+					}
+				}
+			}
+		})
+		// swap todos
+		updatedTodos[swapIndex] = todo;
+		updatedTodos[todoIndex] = swapTodo;
+		// let newTodos = updatedTodos.concat(finTodos);
+		if(top) return "at top";
+		else if(bottom) return "at bottom";
+		else return updatedTodos;
+	}
+
+	moveTodo(todo, where, isdone)
+	{
+		let todos = this.state.todos.filter(todo => !todo.isdone);
+		let finTodos = this.state.todos.filter(todo => todo.isdone);
+		let updatedTodos;
+		
+		if(isdone)
+		{
+			// finished todos
+			updatedTodos = this.swapTodos(todo, finTodos, where);
+			if(updatedTodos === "at top")
+			{
+				return;
+			}
+			else if (updatedTodos === "at bottom")
+			{
+				return;
+			}
+			else
+			{
+				let newTodos = updatedTodos.concat(todos);
+				this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
+			}
+
+		}
+		else
+		{
+			// not finished todos
+			updatedTodos = this.swapTodos(todo, todos, where);
+			if(updatedTodos === "at top")
+			{
+				return;
+			}
+			else if (updatedTodos === "at bottom")
+			{
+				return;
+			}
+			else
+			{
+				let newTodos = updatedTodos.concat(finTodos);
+				this.setState({todos : newTodos}, () => this.props.updateProjectTodos(this.state.todos));
+			}
+		}
+
+		// else if(where === "down")
+		// {
+		// 	console.log("down");
+		// 	console.log(todo, where, isdone);
+		// }
+	}
+
+
 	
 	componentDidMount()
 	{
@@ -118,15 +254,21 @@ class TodoContainer extends React.Component
 					setinputIsVisible = {this.props.setInputIsVisible}/>
 				<div className = "" id = "todoLists">
 					<TodoList 
-						todos = {todos.filter(todo => !todo.isdone)} 
+						todos = {todos ? todos.filter(todo => !todo.isdone) : [] }
 						changeIsDone = {this.changeIsDone}
 						markAllDone = {this.markAllDone}
-						deleteTodos = {this.deleteTodos}/>
+						deleteTodos = {this.deleteTodos}
+						deleteTodo = {this.deleteTodo}
+						updateTodo = {this.updateTodo}
+						moveTodo = {this.moveTodo}/>
 					<FinishedTodosList 
-						finishedTodos = {todos.filter(todo => todo.isdone)} 
+						finishedTodos = {todos ? todos.filter(todo => todo.isdone) : []} 
 						changeIsDone = {this.changeIsDone} 
 						undo = {this.undoAll}
-						deleteTodos = {this.deleteTodos}/>
+						deleteTodos = {this.deleteTodos}
+						deleteTodo = {this.deleteTodo}
+						updateTodo = {this.updateTodo}
+						moveTodo = {this.moveTodo}/>
 				</div>
 			</div>
 		);

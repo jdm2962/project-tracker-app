@@ -8,7 +8,7 @@ const converter = aws.DynamoDB.Converter;
 
 function putItem(project)
 {
-	let entryItem = {}
+	let entryItem = {};
 
 	// populate item with formatted values
 	for(const [key, value] of Object.entries(project))
@@ -34,18 +34,66 @@ function putItem(project)
 	});
 }
 
+const deleteItem = (project) =>
+{
+	const params = 
+	{
+		TableName : "Projects",
+		Key : 
+		{
+			"userId" : {S : project.userId},
+			"project" : {S : project.project}
+		},
+        ReturnValues : "ALL_OLD"
+	};
+
+	return new Promise((resolve, reject) =>
+	{
+		dynamoDb.deleteItem(params, (err, data) =>
+		{
+			if(err) reject(err);
+			else resolve(data);
+		});
+	});
+};
+
+
+
+
+
 exports.handler = async (event) => {
     
-    let project = JSON.parse(event.body);
+    // expect an array of two objects: new and old
+    let projects = JSON.parse(event.body);
+    let oldProject = projects[0];
+    let newProject = projects[1];
     let result;
     let statusCode;
     let data;
     
     try
     {
-        result = await putItem(project);
-        data = "Success";
-        statusCode = 200;
+        // delete old
+        result = await deleteItem(oldProject);
+        if(result === oldProject)
+        {
+            try
+            {
+                result = await putItem(newProject);
+                data = "Success. Project updated";
+                statusCode = 200;
+            }
+            catch(err)
+            {
+                data = "Error entering project...";
+                statusCode = 500;
+            }
+        }
+        else
+        {
+            data = "There was an error deleting your project";
+            statusCode = 500;
+        }
         
     }
     catch(err)
@@ -71,5 +119,3 @@ exports.handler = async (event) => {
     };
     return response;
 };
-
-exports.putItem = putItem;

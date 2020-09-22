@@ -28,6 +28,7 @@ export default class TodoList extends React.Component
 		this.props.deleteTodos(this.state.todos);
 	}
 
+
 	componentDidUpdate(prevProps, prevState, snapshot)
 	{
 		let todos = this.props.todos;
@@ -44,7 +45,7 @@ export default class TodoList extends React.Component
 
 		return(
 			<div className = "" id = "todoList">
-				<h2 className = "content is-medium underline is-bold">TODO</h2>
+				<h2 className = "content is-bold">TODO</h2>
 				<div className="field is-grouped">
 				  <p className="control">
 				    <button 
@@ -65,7 +66,12 @@ export default class TodoList extends React.Component
 
 				{todos.map((todo) => {
 					return (
-						<Todo key = {todo.todoid} todo = {todo} changeIsDone = {this.props.changeIsDone}/>
+						<Todo 
+							key = {todo.todoid} todo = {todo} 
+							changeIsDone = {this.props.changeIsDone}
+							deleteTodo = {this.props.deleteTodo}
+							updateTodo = {this.props.updateTodo}
+							moveTodo = {this.props.moveTodo}/>
 					)
 				})}
 			</div>

@@ -33,25 +33,34 @@ const Projects = () =>
 
 	useEffect(() =>
 	{
+		let local = localStorage.getItem("projects");
 		// change page title
 		let title = document.querySelector("#title");
 		title.innerHTML = "Projects";
-
-		fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/projects/" + userId)
-			.then(res => res.json())
-			.then(data => 
-			{
-				// sort projects
-				let sortedProjects = sortByDate(data);
-				setProjects(sortedProjects);
-			})
-			.catch(err => console.log(err))		
+		if(!local || local.length === 0)
+		{
+			fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/projects/" + userId)
+				.then(res => res.json())
+				.then(data => 
+				{
+					// sort projects
+					let sortedProjects = sortByDate(data);
+					setProjects(sortedProjects);
+					localStorage.setItem("projects", JSON.stringify(data));
+				})
+				.catch(err => console.log(err))		
+		}
+		else
+		{
+			let projs = JSON.parse(localStorage.getItem("projects"));
+			setProjects(projs);
+		}
 	}, [userId]);
 
 
 	const addProject = () =>
 	{
-		
+			
 		let modifiedValue = formatSpaces(value);
 		let modifiedProject;
 		let isNewProj = isNewProject;
@@ -62,6 +71,7 @@ const Projects = () =>
 			// check whether project already exists
 			projects.forEach(project => 
 			{
+				// check for duplicate project names
 				if(value === convertToSpaces(project.project))
 				{
 					setIsNewProject(false);
@@ -85,6 +95,8 @@ const Projects = () =>
 				newProjects.push(newProject);
 				setProjects(newProjects);
 
+				// update local storage
+				localStorage.setItem("projects", JSON.stringify(newProjects));
 
 				// send modified project to server
 				modifiedProject = {...newProject};
@@ -137,12 +149,22 @@ const Projects = () =>
 		}
 	};
 
-	
+	const exitInput = (event) =>
+	{
+		let keyCode = event.keyCode || event.which;
+		if(keyCode === 27)
+		{
+			document.getElementById("projectCancel").click();
+		}
+	};
+
 
 	return(
 		<div className = "section pt-4" id = "projects">
-			<h1 className = "title is-2 is-bold has-text-light mb-5">Projects</h1>
-			{/*<h3 className = "title is-6 has-text-light mb-2">Add a Project:</h3>*/}
+			<h2 
+				className = "content mb-5 projectsH2">
+					Projects
+			</h2>
 			<div>
 				<ToggleProjectButton 
 					isHidden = {isHidden} 
@@ -157,6 +179,7 @@ const Projects = () =>
 				isHidden = {isHidden}
 				value = {value}
 				changeInput = {changeInput}
+				exitInput = {exitInput}
 				addProject = {addProject}
 				keyAddProject = {keyAddProject}/>
 
