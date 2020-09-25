@@ -45,10 +45,6 @@ const ProjectSettings = (props) =>
 			let updateProjectName = props.updateProjectName;
 			updateProjectName(textValue);
 			setIsClicked(!isClicked);
-			// if(textValue !== project)
-			// {
-			// 	props.saveToDb();
-			// }
 		}
 		else
 		{
@@ -83,12 +79,12 @@ const ProjectSettings = (props) =>
 		if(answer === "delete")
 		{
 			console.log("okay deleting");
-			currentProjects.forEach(proj => 
+			currentProjects.forEach((proj, index) => 
 			{
 				if(proj.project === project)
 				{
 					projectToDelete = {...proj};
-					updatedProjects.splice(currentProjects.indexOf(proj));
+					updatedProjects.splice(index, 1);
 					// set local storage
 					localStorage.setItem("projects", JSON.stringify(updatedProjects));
 					// update db

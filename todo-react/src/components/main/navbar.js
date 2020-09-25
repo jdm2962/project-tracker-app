@@ -3,8 +3,10 @@ import { NavLink } from "react-router-dom";
 
 import "../../sass/header.scss";
 
-const NavBar = () =>
+const NavBar = (props) =>
 {
+	let loggedIn = props.loggedIn;
+	let setLoggedIn = props.setLoggedIn;
 
 	const activate = () =>
 	{
@@ -15,7 +17,12 @@ const NavBar = () =>
 		hamburger.classList.toggle("is-active");
 	
 	};
-	
+
+	const logout = () =>
+	{
+		setLoggedIn(false);
+	};
+
 	return(
 		<>
 			<nav 
@@ -38,23 +45,42 @@ const NavBar = () =>
 				</div>
 				<div className = "navbar-menu" id = "navbar">
 					<div className = "navbar-end">
-						<div className = "linkContainer">
+					<div className = "linkContainer">
 							<NavLink 
-								to = "/" 
+								to = "/"
+								id = "navbar-item"
 								className = "navbarItem" 
 								exact activeClassName = "isActive">
 									Home
 							</NavLink>
 						</div>
-						<div className = "linkContainer">
-							<NavLink 
-								to = "/projects"
-								id = "navbar-item"
-								className = "navbarItem" 
-								exact activeClassName = "isActive">
-									Projects
-							</NavLink>
-						</div>
+						{
+							loggedIn &&
+
+								<div className = "linkContainer">
+									<NavLink 
+										to = "/projects"
+										id = "navbar-item"
+										className = "navbarItem" 
+										exact activeClassName = "isActive">
+											Projects
+									</NavLink>
+								</div>
+						}
+							
+						{
+								loggedIn &&
+								<div className = "linkContainer">
+									<NavLink 
+										onClick = {logout}
+										to = "/" 
+										className = "navbarItem" 
+										exact activeClassName = "isActive">
+											Logout
+									</NavLink>
+								</div>
+						}
+					
 					</div>
 				</div>
 			</nav>

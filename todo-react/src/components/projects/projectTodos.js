@@ -3,21 +3,17 @@ import { useParams } from "react-router-dom";
 
 import TodoContainer from "../todoCore/todoContainer";
 import ProjectSettings from "./projectSettings";
+import ProjectSelect from "./projectSelect";
 
 import {formatSpaces} from "../../helpers";
 import {convertToSpaces} from "../../helpers";
 
 const ProjectTodos = (props) =>
 {	
-	// let project = props.location.state.project;
-	// const { project } = useParams();
-	// let project = props.location.state.project;
-	let projectInfo = props.location.pathname.split("/");
-	let project = projectInfo[2];
-	let projectId = projectInfo[3];
-	console.log(projectInfo);
-
-	const [currentProject, setCurrentProject] = useState(project);
+	const [projectInfo, setProjectInfo] = useState(props.location.pathname.split("/"));
+	const [projectName, setProjectName] = useState(projectInfo[2]);
+	const [projectId, setProjectId] = useState(projectInfo[3]);
+	const [currentProject, setCurrentProject] = useState({});
 	const [inputIsVisible, setInputIsVisible] = useState(false);
 	const [isCancelButton, setIsCancelButton] = useState(false);
 	const [settingsIsVisible, setSettingsIsVisible] = useState(false);
@@ -77,18 +73,20 @@ const ProjectTodos = (props) =>
 
 	};
 
-	const updateProjectName = (projectName) =>
+	const updateProjectName = (projName) =>
 	{
+		setProjectName(projName);
 		let oldProject = {...currentProject};
 		let updatedProject = {...currentProject};
-		updatedProject.project = formatSpaces(projectName);
-		let projs = {};
-		projs.oldProject = oldProject;
-		projs.updatedProject = updatedProject;
+		updatedProject.project = formatSpaces(projName);
 		setCurrentProject(updatedProject);
 		// set local storage
 		let currentProjects = JSON.parse(localStorage.getItem("projects"));
+		// need both old and new items for db update
 		let updatedProjects;
+		let projs = {};
+		projs.oldProject = oldProject;
+		projs.updatedProject = updatedProject;
 		currentProjects.forEach(project => 
 		{
 			if(project.project === oldProject.project)
@@ -123,19 +121,35 @@ const ProjectTodos = (props) =>
 
 	useEffect(() =>
 	{
-		// load from local storage
+		// load from local storage if available
 		let projects = JSON.parse(localStorage.getItem("projects"));
-		projects.forEach(proj =>
+		if(projects)
 		{
-			if(proj.projectId === projectId)
+			projects.forEach(proj =>
 			{
-				setCurrentProject(proj);
-			}
-		});
+				if(proj.projectId === projectId)
+				{
+					setCurrentProject(proj);
+				}
+			});
+		}
+		else
+		{
+			// if nothing in local storage, query db
+			let userId = 1;
+			fetch("https://hmsjtztwr8.execute-api.us-east-1.amazonaws.com/test1/project/" + userId + "/" + projectName)
+				.then(res => res.json())
+				.then(data => 
+				{
+					setCurrentProject(data)
+				})
+				.catch(err => console.log(err))
+		}
 		let title = document.querySelector("#title");
-		title.innerHTML = convertToSpaces(convertToSpaces(project));
+		title.innerHTML = convertToSpaces(convertToSpaces(projectName));
 
-	}, []);
+	}, [projectId, setCurrentProject]);
+
 
 
 	return(
@@ -147,6 +161,9 @@ const ProjectTodos = (props) =>
 					className = "content mt-4 projectName">
 							{currentProject.project ? convertToSpaces(currentProject.project) : ""}
 				</h2>
+				<ProjectSelect 
+					projectName = {projectName}
+					setCurrentProject = {setCurrentProject}/>
 				<button 
 					className = "button" id = "cog"
 					onClick = {toggleSettings}>
@@ -215,14 +232,3 @@ const ProjectTodos = (props) =>
 
 
 export default ProjectTodos;
-
-
-
-
-
-
-
-
-
-
-

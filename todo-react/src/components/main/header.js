@@ -17,7 +17,7 @@ class Header extends React.Component
 					<div className="container is-flex">
 						<h1 className="heroTitle">
 							<NavLink
-								to = "/home"
+								to = "/"
 								className = "heroNavTitle">
 									<span className = "icon mr-3">
 										<i className="fas fa-tasks"></i>
@@ -25,7 +25,9 @@ class Header extends React.Component
 						        	Project Tracker
 					        </NavLink>
 				    	</h1>
-						<NavBar />
+						<NavBar 
+							loggedIn = {this.props.loggedIn}
+							setLoggedIn = {this.props.setLoggedIn}/>
 					</div>
 				  </div>
 			</section>

@@ -169,18 +169,22 @@
 
 .projectButton
 {
-	border : none;
 	padding : 1.5rem 1.0rem;
-	border-radius : .75rem;
+	background-color : #1e3799;
+	color : #f8c291;
+	border-radius : .5rem;
+	border : none;
+	display : inline-block;
 	overflow-wrap : break-word;
 	max-width : 100%;
 }
 
-#projectButton a
+.projectButton:hover
 {
-	display : inline-block;
-	overflow-wrap : word-break;
+	color : white;
+	background-color : #0c2461;
 }
+
 
 #editProject
 {

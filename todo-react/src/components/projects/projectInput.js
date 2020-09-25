@@ -2,9 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 
 const ProjectInput = (props) =>
 {
-
-	const [cancelVisible, setCancelVisible] = useState(false);
-
 	const isHidden = props.isHidden;
 	const value = props.value;
 	const changeInput = props.changeInput;
@@ -38,7 +35,8 @@ const ProjectInput = (props) =>
 					onChange = {changeInput} 
 					onKeyUp = {exitProjectInput}
 					onKeyPress = {keyAddProject}
-					value = {value}/>
+					value = {value}
+					maxLength = "30"/>
 				<button 
 					className = "button is-link" 
 					id = "addProject"

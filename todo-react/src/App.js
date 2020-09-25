@@ -1,46 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-	BrowserRouter as Router,
+	Router,
 	Switch,
 	Route,
-	Link,
+	Redirect,
 } from "react-router-dom";
 
+import history from './components/main/history';
+
 import Header from "./components/main/header";
-import Footer from "./components/main/footer";
 import Home from "./components/main/home";
-import TodoContainer from "./components/todoCore/todoContainer";
+import Footer from "./components/main/footer";
+import RedirectTo from "./components/main/redirectTo";
 import Login from "./components/login/login";
-import SignUp from "./components/login/signup";
 import Projects from "./components/projects/projects";
 import ProjectTodos from "./components/projects/projectTodos";
 
 
 
-function App() {
+function App() 
+{
+	// const [loggedIn, setLoggedIn] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+
   return (
-	<Router>
-		<Header />
+  	<>
+		<Router history = {history}>
+			<Header 
+				loggedIn = {loggedIn}
+				setLoggedIn = {setLoggedIn}/>
 
-		<Switch>
-			<Route path = "/projects">
-				<Projects />
-			</Route>
-			<Route path = "/project/:project" render = {props => <ProjectTodos {...props} />}>
-			</Route>
-			<Route path = "/login">
-				<Login />
-			</Route>
-			<Route path = "/signup">
-				<SignUp />
-			</Route>
-			<Route path = "/">
-		  <Home />
-			</Route>
-		</Switch>
+			<Switch>
+				<Route path = "/projects">
+					{loggedIn ? <Projects /> : <Redirect  to = "/"/> }
+				</Route>
+				<Route path = "/project/:project:projectId" render = {props => loggedIn ? <ProjectTodos {...props}/> : <Redirect  to = "/home"/>}>
+				</Route>
+				<Route path = "/login">
+					<Login />
+				</Route>
+				<Route path = "/home">
+					<Home 
+						loggedIn = {loggedIn}
+						setLoggedIn = {setLoggedIn}/>
+				</Route>
+				<Route path = "/">
+				  <RedirectTo />
+				</Route>
+			</Switch>
 
-		<Footer />
-	</Router>
+			<Footer />
+		</Router>
+
+	</>
   );
 }
 

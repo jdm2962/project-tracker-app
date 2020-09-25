@@ -161,10 +161,6 @@ const Projects = () =>
 
 	return(
 		<div className = "section pt-4" id = "projects">
-			<h2 
-				className = "content mb-5 projectsH2">
-					Projects
-			</h2>
 			<div>
 				<ToggleProjectButton 
 					isHidden = {isHidden} 
@@ -175,6 +171,10 @@ const Projects = () =>
 						Project Already Exists
 				</span>
 			</div>
+			<h2 
+				className = "content mt-5 projectsH2">
+					Projects
+			</h2>
 			<ProjectInput 
 				isHidden = {isHidden}
 				value = {value}
@@ -183,7 +183,7 @@ const Projects = () =>
 				addProject = {addProject}
 				keyAddProject = {keyAddProject}/>
 
-			<div className = " mt-6" id = "buttons">
+			<div className = " mt-4" id = "buttons">
 				{
 					projects.length > 0 ?
 					projects.map(project => {

@@ -1,0 +1,80 @@
+p
+{
+	text-align : center;
+}
+
+.columns
+{
+	width : 100%;
+}
+
+
+#homeContainer
+{
+	width : 90%;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
+	padding : 1.5rem 1.2rem;
+}
+
+.addProjectContainer
+{
+	border-radius : 10px;
+	align-self : flex-start;
+	margin-top : 1rem;
+}
+
+.addProjectContainer .projectsButton
+{
+	background-color : #78e08f;
+	color : #0a3d62;
+	width : 50%;
+}
+
+.addProjectContainer .projectsButton:hover
+{
+	background-color : #079992;
+	color : #f8c291;
+}
+
+
+.currentProjects
+{
+	width : 70%;
+	border-radius : 10px;
+	align-self : center;
+	margin-top : 2rem;
+}
+
+.recentProjects
+{
+	display : flex;
+	justify-content : space-evenly;
+}
+
+.stats
+{
+	border-radius : 10px;
+	align-self : flex-start;
+	margin-top : 3rem;
+	margin-bottom : 1rem;
+	margin-left : 1rem;
+}
+
+#stats p
+{
+	margin-bottom : .25rem;
+}
+
+#stats div
+{
+	margin-bottom : .15rem;
+}
+
+.statNumbers
+{
+	display : flex;
+	justify-content : center;
+	color : #0c2461;
+}

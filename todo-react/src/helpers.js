@@ -38,11 +38,11 @@ const sortByDate = (arr) =>
 
 			if(currentDate > nextDate) 
 			{
-				return 1;
+				return -1;
 			}
 			else if(currentDate < nextDate)
 			{
-				return -1;
+				return 1;
 			}
 			else
 			{
