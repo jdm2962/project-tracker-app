@@ -39,7 +39,7 @@ const Stats = (props) =>
 
 
 	return(
-		<div className = "stats has-background-light column" id = "stats">
+		<div className = "stats has-background-light column is-one-quarter" id = "stats">
 			<p className = "content is-size-4 is-bold">Your stats</p>
 			<p className = "content is-size-6">Projects</p>
 			<div className = "statNumbers content is-size-5 is-bold">{projects}</div>

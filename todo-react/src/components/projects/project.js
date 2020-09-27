@@ -23,7 +23,7 @@ const Project = (props) =>
 					{{
 						pathname : `/project/${project.project}/${project.projectId}`
 					}}
-					className = "projectButton">
+					className = "projectButton  button is-link">
 					{convertToSpaces(project.project)}
 			</NavLink>
 		</>

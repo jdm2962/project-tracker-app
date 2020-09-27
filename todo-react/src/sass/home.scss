@@ -1,3 +1,4 @@
+
 p
 {
 	text-align : center;
@@ -14,29 +15,26 @@ p
 	width : 90%;
 	display : flex;
 	flex-direction : column;
-	align-items : center;
+	justify-content : center;
 	padding : 1.5rem 1.2rem;
 }
 
-.addProjectContainer
+#addProjectContainer
 {
+	height : 50%;
 	border-radius : 10px;
-	align-self : flex-start;
-	margin-top : 1rem;
+	margin : 1rem 15% 0 2rem;
+	padding : 2rem 0;
+	display : flex;
+	flex-direction : column;
+	align-items : center;
 }
 
-.addProjectContainer .projectsButton
+#addProjectContainer .projectsButton
 {
-	background-color : #78e08f;
-	color : #0a3d62;
 	width : 50%;
 }
 
-.addProjectContainer .projectsButton:hover
-{
-	background-color : #079992;
-	color : #f8c291;
-}
 
 
 .currentProjects
@@ -44,22 +42,30 @@ p
 	width : 70%;
 	border-radius : 10px;
 	align-self : center;
-	margin-top : 2rem;
+	margin-top : 1rem;
+	margin-right : 2rem;
+	padding : 1rem .75rem;
 }
 
 .recentProjects
 {
 	display : flex;
-	justify-content : space-evenly;
+	flex-wrap : wrap;
+	justify-content : center;
+}
+
+.recentProjects a
+{
+	margin : .25rem;
 }
 
 .stats
-{
+{	
+	padding : 1rem;
+	height : 70%;
 	border-radius : 10px;
-	align-self : flex-start;
-	margin-top : 3rem;
-	margin-bottom : 1rem;
-	margin-left : 1rem;
+	margin : 1rem 8% 0rem 5%;
+	padding-bottom : 0;
 }
 
 #stats p
@@ -76,5 +82,34 @@ p
 {
 	display : flex;
 	justify-content : center;
-	color : #0c2461;
+	// color : #0c2461;
 }
+
+@media only screen and (max-width : 768px)
+{
+	
+	#addProjectContainer
+	{
+		margin : 1rem;
+	}
+
+	#addProjectContainer .projectsButton
+	{
+		font-size : .85rem;
+		width : 70%;
+		word-wrap: break-word;
+	}
+
+	.stats
+	{
+		margin : 0;
+	}
+
+	.currentProjects
+	{
+		width : 100%;
+		align-self : center;
+		margin-top : 1rem;
+	}
+}
+

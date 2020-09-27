@@ -182,6 +182,19 @@
 		align-items: center;
 	}
 
+	#todoList
+	{
+		border-right : none;
+		padding-right : 0px;
+		margin-left : 0;
+	}
+
+	#finishedList
+	{
+		margin : 1rem 0;
+		padding-left : 0px;
+	}
+
 
 	.todoInput
 	{

@@ -170,8 +170,6 @@
 .projectButton
 {
 	padding : 1.5rem 1.0rem;
-	background-color : #1e3799;
-	color : #f8c291;
 	border-radius : .5rem;
 	border : none;
 	display : inline-block;
@@ -179,12 +177,12 @@
 	max-width : 100%;
 }
 
-.projectButton:hover
+/*.projectButton:hover
 {
 	color : white;
 	background-color : #0c2461;
 }
-
+*/
 
 #editProject
 {
@@ -201,6 +199,7 @@
 	margin-top : 1.5rem;
 	margin-bottom : 1rem;
 	width : 90%;
+	display : flex;
 }
 
 #addTodoBtnContainer
@@ -242,5 +241,12 @@
 	#controlButtons
 	{
 		margin : 0;
+		align-items : center;
+	}
+
+	#controlButtons *
+	{
+		margin : 0;
+		width : 50%;
 	}
 }

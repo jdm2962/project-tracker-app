@@ -83,7 +83,7 @@ export default class TodoInput extends React.Component
 						onKeyPress = {this.submitTodo}
 						onKeyUp = {this.exitTodoInput}
 						className="input is-primary textInput"
-						placeholder = "Add a TODO!"/>
+						placeholder = "Add a Task!"/>
 					</div>
 				</div>
 
@@ -91,7 +91,7 @@ export default class TodoInput extends React.Component
 				 	className="button is-link" 
 					onClick = {this.passTodoUp}
 					id = "addTodo">
-				Add Todo!
+				Add Task!
 				</button>
 			</div>
 		);

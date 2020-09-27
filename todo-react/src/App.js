@@ -21,7 +21,7 @@ import ProjectTodos from "./components/projects/projectTodos";
 function App() 
 {
 	// const [loggedIn, setLoggedIn] = useState(false);
-	const [loggedIn, setLoggedIn] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(true);
 
   return (
   	<>

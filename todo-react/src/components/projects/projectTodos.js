@@ -180,7 +180,7 @@ const ProjectTodos = (props) =>
 				settingsIsVisible = {settingsIsVisible}
 				setSettingsIsVisible = {setSettingsIsVisible}/>
 			
-			<div className="field is-grouped mr-6" id = "controlButtons">
+			<div className="field is-grouped" id = "controlButtons">
 				<p className="control" id = "addTodoBtnContainer">
 				{
 					isCancelButton
@@ -197,7 +197,7 @@ const ProjectTodos = (props) =>
 							onClick = {toggleInputVisible}
 							className = "button is-link"
 							id = "addTodoButton">
-								Add a Todo!
+								Add a Task!
 						</button>
 				}
 
