@@ -22,6 +22,7 @@ function App()
 {
 	// const [loggedIn, setLoggedIn] = useState(false);
 	const [loggedIn, setLoggedIn] = useState(true);
+	const [prod, setProjd] = useState(false);	// sets redirect for production
 
   return (
   	<>
@@ -44,9 +45,20 @@ function App()
 						loggedIn = {loggedIn}
 						setLoggedIn = {setLoggedIn}/>
 				</Route>
-				<Route path = "/">
-				  <RedirectTo />
-				</Route>
+
+				{
+					prod
+					?
+						<Route path = "/" render = {props => <RedirectTo {...props}/>} />
+					:
+						<Route path = "/">
+							<Home 
+								loggedIn = {loggedIn}
+								setLoggedIn = {setLoggedIn}/>
+						</Route>
+				}
+
+				
 			</Switch>
 
 			<Footer />

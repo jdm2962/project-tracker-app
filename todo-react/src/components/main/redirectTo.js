@@ -1,42 +1,40 @@
 import React, { useState, useEffect } from "react";
 
-import { Link, useLocation, Redirect } from "react-router-dom";
+import { useLocation, Redirect } from "react-router-dom";
 
-import Login from "../login/login";
 
 
 const RedirectTo = (props) =>
 {
 	let location = useLocation();
 	let hashArr;
-	console.log("home ran");
 
 	// console.log(location);
 	const [redirect, setRedirect] = useState(false);
-	const [route, setRoute] = useState("/");
+	const [route, setRoute] = useState(props.location.state ? props.location.state.redir :  "/");
 
 	useEffect(() =>
 	{
 		if(location.hash.includes("#!"))
 		{
 			hashArr = location.hash.split("#!");
-			if(!hashArr[1])
+			if(hashArr[1] === "/" || hashArr[1] === "")
 			{
-				hashArr[1] = "/";
+				hashArr[1] = "/home";
 			}
 			setRedirect(true);
 			setRoute(hashArr[1]);
 		}
-	});
+	}, [props.location.state, route, redirect]);
 
 	return(
 		<>
 			{
 				redirect 
 					?
-						<Redirect  push to = {route === "/" || route === "/home" ? "/home" : route}/>
+						<Redirect  push to = {`${route}`}/>
 					:
-						<Redirect to = "/home"/>
+						<Redirect to = {{pathname : "/", state : {redir : route}}}/>
 			}
 		</>
 	);
