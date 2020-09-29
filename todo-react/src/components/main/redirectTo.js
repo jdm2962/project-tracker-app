@@ -12,7 +12,6 @@ const RedirectTo = (props) =>
 	// console.log(location);
 	const [redirect, setRedirect] = useState(false);
 	const [route, setRoute] = useState(props.location.state ? props.location.state.redir :  "/");
-
 	useEffect(() =>
 	{
 		if(location.hash.includes("#!"))
@@ -22,20 +21,25 @@ const RedirectTo = (props) =>
 			{
 				hashArr[1] = "/home";
 			}
-			setRedirect(true);
 			setRoute(hashArr[1]);
+		}
+		else if(location.hash === "")
+		{
+			setRoute("/home");
 		}
 	}, [props.location.state, route, redirect]);
 
+	// {
+	// 	redirect 
+	// 		?
+	// 			<Redirect  push to = {`${route}`}/>
+	// 		:
+	// 			<Redirect to = {{pathname : "/", state : {redir : route}}}/>
+	// }
+
 	return(
 		<>
-			{
-				redirect 
-					?
-						<Redirect  push to = {`${route}`}/>
-					:
-						<Redirect to = {{pathname : "/", state : {redir : route}}}/>
-			}
+			<Redirect to = {{pathname : route, state : {redir : route}}}/>
 		</>
 	);
 };

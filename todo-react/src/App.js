@@ -22,7 +22,7 @@ function App()
 {
 	// const [loggedIn, setLoggedIn] = useState(false);
 	const [loggedIn, setLoggedIn] = useState(true);
-	const [prod, setProjd] = useState(false);	// sets redirect for production
+	const [prod, setProjd] = useState(true);	// set true for production(workaround for aws s3 redirection)
 
   return (
   	<>
