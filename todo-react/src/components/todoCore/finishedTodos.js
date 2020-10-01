@@ -42,7 +42,7 @@ export default class FinishedTodos extends React.Component
 		let finTodos = this.state.finTodos;
 		return(
 			<div className = "control" id = "finishedList">
-				<h2 className = "content is-bold">Finished</h2>
+				<h2 className = "content is-bold">Finished Tasks</h2>
 
 				<div className="field is-grouped">
 				  <p className="control">

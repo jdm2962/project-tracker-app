@@ -45,7 +45,7 @@ export default class TodoList extends React.Component
 
 		return(
 			<div className = "" id = "todoList">
-				<h2 className = "content is-bold">TODO</h2>
+				<h2 className = "content is-bold">Tasks Todo</h2>
 				<div className="field is-grouped">
 				  <p className="control">
 				    <button 
