@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 import TodoContainer from "../todoCore/todoContainer";
 import ProjectSettings from "./projectSettings";
@@ -7,6 +6,7 @@ import ProjectSelect from "./projectSelect";
 
 import {formatSpaces} from "../../helpers";
 import {convertToSpaces} from "../../helpers";
+import history from "../main/history";
 
 const ProjectTodos = (props) =>
 {	
@@ -75,24 +75,31 @@ const ProjectTodos = (props) =>
 
 	const updateProjectName = (projName) =>
 	{
+		// update project name
 		setProjectName(projName);
+		// update url
+		history.push(`/project/${projName}/${currentProject.projectId}`);
+
 		let oldProject = {...currentProject};
 		let updatedProject = {...currentProject};
+		// update project
 		updatedProject.project = formatSpaces(projName);
 		setCurrentProject(updatedProject);
-		// set local storage
-		let currentProjects = JSON.parse(localStorage.getItem("projects"));
+
 		// need both old and new items for db update
 		let updatedProjects;
 		let projs = {};
 		projs.oldProject = oldProject;
 		projs.updatedProject = updatedProject;
-		currentProjects.forEach(project => 
+
+		// set local storage
+		let currentProjects = JSON.parse(localStorage.getItem("projects"));
+		currentProjects.forEach((project, index) => 
 		{
 			if(project.project === oldProject.project)
 			{
 				updatedProjects = [...currentProjects];
-				updatedProjects[currentProjects.indexOf(project)] = updatedProject;
+				updatedProjects[index] = updatedProject;
 				localStorage.setItem("projects", JSON.stringify(updatedProjects));
 			}
 		});
@@ -148,7 +155,7 @@ const ProjectTodos = (props) =>
 		let title = document.querySelector("#title");
 		title.innerHTML = convertToSpaces(convertToSpaces(projectName));
 
-	}, [projectId, setCurrentProject]);
+	}, [projectName, projectId, setCurrentProject]);
 
 
 
@@ -163,6 +170,7 @@ const ProjectTodos = (props) =>
 				</h2>
 				<ProjectSelect 
 					projectName = {projectName}
+					currentProject = {currentProject}
 					setCurrentProject = {setCurrentProject}/>
 				<button 
 					className = "button" id = "cog"

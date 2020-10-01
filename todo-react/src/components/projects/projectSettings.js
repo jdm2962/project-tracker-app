@@ -42,6 +42,7 @@ const ProjectSettings = (props) =>
 	{
 		if(textValue !== "")
 		{
+			// console.log(textValue);
 			let updateProjectName = props.updateProjectName;
 			updateProjectName(textValue);
 			setIsClicked(!isClicked);

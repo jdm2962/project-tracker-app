@@ -7,8 +7,6 @@ import {convertToSpaces} from "../../helpers";
 
 const ProjectSelect = (props) =>
 {
-
-	const [currentProject, setCurrentProject] = useState(props.currentProject || {});
 	const [projects, setProjects] = useState([]);
 	const [value, setValue] = useState(convertToSpaces(props.projectName));
 
@@ -48,17 +46,13 @@ const ProjectSelect = (props) =>
 		});
 	};
 
-	useEffect(() =>
-	{
-		console.log("useEffect ran");
-		getProjects(1);		
-	}, []);
-
 
 	useEffect(() =>
 	{
+		console.log("projectSelect ran");
 		getProjects(1);
-	}, [value, props.projectName]);
+		setValue(convertToSpaces(props.projectName)); 	
+	}, [setValue, props.projectName]);
 
 
 
