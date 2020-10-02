@@ -75,22 +75,11 @@ const ProjectTodos = (props) =>
 
 	const updateProjectName = (projName) =>
 	{
-		// update project name
-		setProjectName(projName);
-		// update url
-		history.push(`/project/${projName}/${currentProject.projectId}`);
-
+		let updatedProjects;
 		let oldProject = {...currentProject};
 		let updatedProject = {...currentProject};
 		// update project
 		updatedProject.project = formatSpaces(projName);
-		setCurrentProject(updatedProject);
-
-		// need both old and new items for db update
-		let updatedProjects;
-		let projs = {};
-		projs.oldProject = oldProject;
-		projs.updatedProject = updatedProject;
 
 		// set local storage
 		let currentProjects = JSON.parse(localStorage.getItem("projects"));
@@ -103,6 +92,19 @@ const ProjectTodos = (props) =>
 				localStorage.setItem("projects", JSON.stringify(updatedProjects));
 			}
 		});
+
+		// update project name and current project
+		setProjectName(projName);
+		setCurrentProject(updatedProject);
+
+		// update url
+		history.replace(`/project/${projName}/${currentProject.projectId}`);
+
+		// need both old and new items for db update
+		let projs = {};
+		projs.oldProject = oldProject;
+		projs.updatedProject = updatedProject;
+
 		// update db
 		const options = 
 		{
@@ -152,10 +154,14 @@ const ProjectTodos = (props) =>
 				})
 				.catch(err => console.log(err))
 		}
+	}, [projectId, setCurrentProject]);
+
+	useEffect(() => 
+	{
+		// update page title
 		let title = document.querySelector("#title");
 		title.innerHTML = convertToSpaces(convertToSpaces(projectName));
-
-	}, [projectName, projectId, setCurrentProject]);
+}, [projectName]);
 
 
 

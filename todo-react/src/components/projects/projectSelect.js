@@ -41,7 +41,7 @@ const ProjectSelect = (props) =>
 			if(convertToSpaces(listProject.project) === event.target.value)
 			{
 				props.setCurrentProject(projects[index]);
-				history.push(`/project/${listProject.project}/${listProject.projectId}`)
+				history.replace(`/project/${listProject.project}/${listProject.projectId}`)
 			}
 		});
 	};
