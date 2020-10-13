@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 
-import "./login.css";
-
-
 const Login = (props) =>
 {
 

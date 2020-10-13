@@ -7,7 +7,6 @@ import ProjectTodos from "./projectTodos";
 import { formatSpaces } from "../../helpers";
 import { convertToSpaces } from "../../helpers";
 
-import "./projects.css";
 
 
 const Project = (props) =>

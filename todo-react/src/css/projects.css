@@ -15,8 +15,6 @@
 	margin-left : 1.2rem;
 	font-size : 1.15rem;
 	font-weight : 700;
-	max-width : 80%;
-	overflow-wrap: break-word;
 }
 
 .projectsH2
@@ -30,18 +28,30 @@
 {
 	width : 100%;
 	display : flex;
-	justify-content: center;
+	flex-direction : column;
+	/*justify-content: center;*/
 	align-items : center;
 }
 
-#projectBar #cog
+#selectContainer
+{
+	width : 80%;
+	display : flex;
+}
+
+#projectSelect
+{
+	margin-left : 1rem;
+}
+
+#cog
 {
 	margin-left : auto;
 	margin-right : 1rem;
 	background-color : #dcdde1;
 }
 
-#projectBar #cog:hover
+#cog:hover
 {
 	background-color : #d1d8e0;
 }
@@ -150,8 +160,6 @@
 	padding : 5px;
 }
 
-
-
 .iconStyle
 {
 	display : flex;
@@ -241,12 +249,64 @@
 	#controlButtons
 	{
 		margin : 0;
+		flex-direction : column;
 		align-items : center;
 	}
 
-	#controlButtons *
+	#controlButtons p
 	{
 		margin : 0;
-		width : 50%;
+		width : 100%;
+		display : flex;
+		justify-content : center;
 	}
+
+	#controlButtons p button
+	{
+		width : 80%;
+		margin : .25rem;
+	}
+
+	#controlButtons p:nth-child(1)
+	{
+		order : 3;
+		margin-top : 1rem;
+	}
+
+	#saveButton
+	{
+		margin : 0;
+	}
+
+
+	#projectBar
+	{
+		align-items : normal;
+	}
+
+	#selectContainer
+	{
+		margin-bottom : 1rem;
+	}
+
+	#projectSettings
+	{
+		width : 80%;
+		height : 50%;
+		top : 50%;
+		left : 10%;
+	}
+
+	.projectName
+	{
+		max-width : 80%;
+		overflow-wrap: break-word;
+		text-align : center;
+	}
+
+	#projectSelect
+	{
+		margin-right : .1rem;
+	}
+
 }

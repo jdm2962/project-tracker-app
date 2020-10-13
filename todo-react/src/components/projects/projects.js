@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { v4 } from "uuid";
 
-import "./projects.css";
-
 import Project from "./project";
 import ToggleProjectButton from "./toggleProjectButton";
 import ProjectInput from "./projectInput";

@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// bulma
 import 'bulma/css/bulma.css';
+// css
+import "./css/index.css";
+import "./css/projects.css";
+import "./css/todos.css";
+import "./css/login.css";
+// sass
+import "./sass/home.scss";
+import "./sass/header.scss";
+import "./sass/footer.scss";
+
 
 ReactDOM.render(
   <React.StrictMode>

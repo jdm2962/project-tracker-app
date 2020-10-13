@@ -1,6 +1,5 @@
 import React from "react";
 
-import "./todos.css";
 
 export default class Todo extends React.Component
 {
@@ -75,7 +74,7 @@ export default class Todo extends React.Component
 			editText : this.state.editText
 		};
 		this.props.moveTodo(todo, "up", this.state.isdone);
-		this.setState({isEditable : !this.state.isEditable});
+		this.setState({isEditable : false});
 	}
 
 	moveDown()
@@ -89,7 +88,7 @@ export default class Todo extends React.Component
 			editText : this.state.editText
 		};
 		this.props.moveTodo(todo, "down", this.state.isdone);
-		this.setState({isEditable : !this.state.isEditable});
+		this.setState({isEditable : false});
 	}
 
 
@@ -106,53 +105,57 @@ export default class Todo extends React.Component
 	render()
 	{
 		return(
-			this.state.isEditable 
-			?
-				<div className = "" id = "editTodo">
-					<div className = "is-flex" id = "editTodoButtons">
-						<button 
-							className = "mr-1"
-							onClick = {this.saveUpdate}>
-							<span className = "icon"><i className="fas fa-save"></i></span>
-						</button>
-						<button onClick = {this.toggleEditable}>
-							<span className = "icon"><i className="fas fa-times"></i></span>
-						</button>
-						<button 
-							onClick = {this.deleteTodo}
-							className = "deleteBtn">
-							<span className = "icon"><i className="fas fa-trash-alt"></i></span>
-						</button>
-					</div>
-					<div className = "is-flex" id = "editTodoInput">
-						<textarea 
-							className = "input" value = {this.state.editText}
-							onChange = {this.editTextChange}/>
-						<div id = "changeOrderButtons">
-							<button onClick = {this.moveUp}>
-								<span className = "icon"><i className="fas fa-chevron-up"></i></span>
+			<div id = "taskContainer">
+			{
+				this.state.isEditable 
+				?
+					<div className = "" id = "editTodo">
+						<div className = "is-flex" id = "editTodoButtons">
+							<button 
+								className = "mr-1"
+								onClick = {this.saveUpdate}>
+								<span className = "icon"><i className="fas fa-save"></i></span>
 							</button>
-							<button onClick = {this.moveDown}>
-								<span className = "icon"><i className="fas fa-chevron-down"></i></span>
+							<button onClick = {this.toggleEditable}>
+								<span className = "icon"><i className="fas fa-times"></i></span>
+							</button>
+							<button 
+								onClick = {this.deleteTodo}
+								className = "deleteBtn">
+								<span className = "icon"><i className="fas fa-trash-alt"></i></span>
 							</button>
 						</div>
+						<div className = "is-flex" id = "editTodoInput">
+							<textarea 
+								className = "input" value = {this.state.editText}
+								onChange = {this.editTextChange}/>
+						</div>
 					</div>
-				</div>
-			:
-				<div 
-					id = "todo"
-					onClick = {this.toggleEditable}>
-					<label className="checkbox">
-						<input 
-							type = "checkbox" 
-							defaultChecked = {this.props.todo.isdone} 
-							onChange = {this.inputChange}/>
-					</label>
-					<div
-						className = {this.state.isdone ? "content is-medium strike" : "content is-medium"}>
-							{this.state.todo}
+				:
+					<div 
+						id = "todo"
+						onClick = {this.toggleEditable}>
+						<label className="checkbox">
+							<input 
+								type = "checkbox" 
+								defaultChecked = {this.props.todo.isdone} 
+								onChange = {this.inputChange}/>
+						</label>
+						<div
+							className = {this.state.isdone ? "content is-medium strike" : "content is-medium"}>
+								{this.state.todo}
+						</div>
 					</div>
-				</div>
+			}
+			<div id = "changeOrderButtons">
+				<button onClick = {this.moveUp}>
+					<span className = "icon"><i className="fas fa-chevron-up"></i></span>
+				</button>
+				<button onClick = {this.moveDown}>
+					<span className = "icon"><i className="fas fa-chevron-down"></i></span>
+				</button>
+			</div>
+		</div>
 		);
 	}
 }

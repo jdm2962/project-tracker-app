@@ -61,7 +61,7 @@ $hoverFontColor : #60a3bc;
 .navbar
 {
 	width : 50%;
-	margin-left : auto
+	margin-left : auto;
 }
 
 
@@ -89,5 +89,46 @@ $hoverFontColor : #60a3bc;
 .navbarItem:hover
 {
 	color : $hoverFontColor;
+}
+
+@media only screen and (max-width : 600px)
+{
+	#hero-body .container
+	{
+		flex-direction : column;
+		align-items : center;
+	}
+
+	#hero-body .navbar
+	{
+		margin : 0;
+	}
+
+	.navbar
+	{
+		width : 80%;
+		margin-left : 0;
+	}
+
+	.navbar-end .linkContainer
+	{
+		width : 100%;
+		padding : .5rem;
+	}
+
+	.navbar-end .linkContainer:hover
+	{
+		background-color : #a5b1c2;
+	}
+
+	.navbar-end .linkContainer a:hover
+	{
+		color : white;
+	}
+
+	.navbar-end .linkContainer .navbarItem
+	{
+		width : 100%;
+	}
 }
 

@@ -2,7 +2,6 @@ import React from "react";
 
 import { convertToSpaces } from "../../helpers";
 
-import "./projects.css";
 
 class ChangeInput extends React.Component
 {

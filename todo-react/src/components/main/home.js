@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import "../../sass/home.scss";
-
 import { sortByDate } from "../../helpers.js";
 
 import Login from "../login/login";

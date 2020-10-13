@@ -57,7 +57,9 @@ const ProjectSelect = (props) =>
 
 
 	return(			
-		<div className = "select ml-5 projectSelect">
+		<div 
+			className = "select projectSelect"
+			id = "projectSelect">
 			<select 
 				value = {value}
 				onChange = {handleChange}>

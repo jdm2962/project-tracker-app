@@ -174,17 +174,19 @@ const ProjectTodos = (props) =>
 					className = "content mt-4 projectName">
 							{currentProject.project ? convertToSpaces(currentProject.project) : ""}
 				</h2>
-				<ProjectSelect 
-					projectName = {projectName}
-					currentProject = {currentProject}
-					setCurrentProject = {setCurrentProject}/>
-				<button 
-					className = "button" id = "cog"
-					onClick = {toggleSettings}>
-					<span className = "icon">
-						<i className="fas fa-cog"></i>
-					</span>
-				</button>
+				<div id = "selectContainer">
+					<ProjectSelect 
+						projectName = {projectName}
+						currentProject = {currentProject}
+						setCurrentProject = {setCurrentProject}/>
+					<button 
+						className = "button" id = "cog"
+						onClick = {toggleSettings}>
+						<span className = "icon">
+							<i className="fas fa-cog"></i>
+						</span>
+					</button>
+				</div>
 			</div>
 
 			<ProjectSettings 
@@ -229,7 +231,8 @@ const ProjectTodos = (props) =>
 				<p className="control">
 				<button 
 					onClick = {clear}
-					className = "button is-danger">
+					className = "button is-danger"
+					id = "clearButton">
 						Clear
 				</button>
 				</p>

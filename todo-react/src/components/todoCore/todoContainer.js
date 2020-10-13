@@ -3,8 +3,6 @@ import React from "react";
 import {v4} from "uuid"
 import moment from "moment";
 
-import "./todos.css";
-
 import TodoInput from "./todoInput"
 import TodoList from "./todoList";
 import FinishedTodosList from "./finishedTodos";
